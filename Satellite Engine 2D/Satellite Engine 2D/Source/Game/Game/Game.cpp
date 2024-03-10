@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "../../Engine/Logger/Logger.h"
+#include "../../Engine/Rendering/Sprite.h"
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
@@ -21,12 +22,16 @@ void Game::Initialize()
     isRunning = false;
     debug = false;
 
+    // Initializing SDL
+
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         const char* error = SDL_GetError();
         Logger::Error("Error initializing SDL: ", error);
         return;
     }
+
+    // Creating the window
 
     window = SDL_CreateWindow("Satellite Engine 2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
@@ -36,6 +41,8 @@ void Game::Initialize()
         Logger::Error("Error creating SDL window: ", error);
         return;
     }
+
+    // Creating the renderer
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -47,16 +54,25 @@ void Game::Initialize()
     }
 
     isRunning = true;
+
+    assetsManager = new AssetsManager(renderer);
 }
 
 void Game::Run()
 {
+    Setup();
+
     while (isRunning)
     {
         ProcessInput();
         Update();
         Render();
     }
+}
+
+void Game::Setup()
+{
+    assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png");
 }
 
 void Game::ProcessInput()
@@ -74,7 +90,8 @@ void Game::ProcessInput()
                 switch (event.key.keysym.sym)
                 {
                     case SDLK_ESCAPE:
-                        isRunning = false;
+                        //isRunning = false;
+                        spriteId++;
                         break;
                 }
                 break;
@@ -94,11 +111,32 @@ void Game::Render()
 
     // TODO: render all our objects
 
+    Sprite* sprite = new Sprite("dice-one-image", 64, 64, 64, 0, 192, 128, Color(150, 0, 0, 255));
+
+    SDL_Rect src = sprite->GetSourceRect(spriteId % 6);
+
+    SDL_Rect dest = {
+        static_cast<int>((SCREEN_WIDTH / 2) - sprite->GetSize()),
+        static_cast<int>((SCREEN_HEIGHT / 2) - sprite->GetSize()),
+        static_cast<int>(sprite->GetSize() * 2),
+        static_cast<int>(sprite->GetSize() * 2)
+    };
+
+    Color spriteColor = sprite->GetColor();
+
+    SDL_SetRenderDrawColor(renderer, spriteColor.r, spriteColor.g, spriteColor.b, spriteColor.a);
+
+    SDL_RenderCopy(renderer, assetsManager->GetTexture(sprite->GetAssetId()), &src, &dest);
+
     SDL_RenderPresent(renderer); // Swaping back and front buffers
+
+    delete sprite;
 }
 
 void Game::Destroy()
 {
+    delete assetsManager;
+
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
