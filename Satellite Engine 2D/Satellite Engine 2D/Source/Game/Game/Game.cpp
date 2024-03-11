@@ -72,7 +72,7 @@ void Game::Run()
 
 void Game::Setup()
 {
-    assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png");
+    assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png", 192, 128, 64);
 }
 
 void Game::ProcessInput()
@@ -111,22 +111,24 @@ void Game::Render()
 
     // TODO: render all our objects
 
-    Sprite* sprite = new Sprite("dice-one-image", 64, 64, 64, 0, 192, 128, Color(150, 0, 0, 255));
+    Sprite* sprite = new Sprite("dice-one-image", 64, 64, 0, Color(150, 0, 0, 255));
 
-    SDL_Rect src = sprite->GetSourceRect(spriteId % 6);
+    Texture* texture = assetsManager->GetTexture(sprite->GetAssetId());
+
+    SDL_Rect src = texture->GetSourceRect(spriteId % 6);
 
     SDL_Rect dest = {
-        static_cast<int>((SCREEN_WIDTH / 2) - sprite->GetSize()),
-        static_cast<int>((SCREEN_HEIGHT / 2) - sprite->GetSize()),
-        static_cast<int>(sprite->GetSize() * 2),
-        static_cast<int>(sprite->GetSize() * 2)
+        static_cast<int>((SCREEN_WIDTH / 2) - texture->GetTileSize()),
+        static_cast<int>((SCREEN_HEIGHT / 2) - texture->GetTileSize()),
+        static_cast<int>(texture->GetTileSize() * 2),
+        static_cast<int>(texture->GetTileSize() * 2)
     };
 
     Color spriteColor = sprite->GetColor();
 
     SDL_SetRenderDrawColor(renderer, spriteColor.r, spriteColor.g, spriteColor.b, spriteColor.a);
 
-    SDL_RenderCopy(renderer, assetsManager->GetTexture(sprite->GetAssetId()), &src, &dest);
+    SDL_RenderCopy(renderer, texture->GetTexture(), &src, &dest);
 
     SDL_RenderPresent(renderer); // Swaping back and front buffers
 

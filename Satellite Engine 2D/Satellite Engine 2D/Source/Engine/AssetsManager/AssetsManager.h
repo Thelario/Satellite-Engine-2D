@@ -3,11 +3,12 @@
 #include <map>
 #include <string>
 #include <SDL.h>
+#include "../Rendering/Texture.h"
 
 class AssetsManager
 {
 	private:
-		std::map<std::string, SDL_Texture*> textures;
+		std::map<std::string, Texture*> textures;
 		SDL_Renderer* renderer;
 
 	public:
@@ -15,6 +16,6 @@ class AssetsManager
 		~AssetsManager();
 
 		void ClearAssets();
-		void AddTexture(const std::string& assetId, const std::string& filePath);
-		SDL_Texture* GetTexture(const std::string& assetId) const;
+		void AddTexture(const std::string& assetId, const std::string& filePath, int width, int height, int tileSize);
+		Texture* GetTexture(const std::string& assetId) const;
 };
