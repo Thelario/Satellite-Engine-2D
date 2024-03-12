@@ -42,6 +42,12 @@ const SDL_Rect Texture::GetSourceRect()
 
 const SDL_Rect Texture::GetTileSourceRect(int id)
 {
+	if (tileSize == 0)
+	{
+		Logger::Error("The current texture has a tileSize of 0, which means that it is not a tileSet and just a single image.");
+		return { 0, 0, 0, 0 };
+	}
+
 	int columns = width / tileSize;
 	int rows = height / tileSize;
 

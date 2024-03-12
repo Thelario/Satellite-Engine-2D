@@ -26,7 +26,7 @@ void AssetsManager::ClearAssets()
 	textures.clear();
 }
 
-void AssetsManager::AddTexture(const std::string& assetId, const std::string& filePath, int width, int height, int tileSize)
+void AssetsManager::AddTexture(const std::string& assetId, const std::string& filePath, int tileSize)
 {
 	// Create a surface based on the imgage file in the file path specified
 
@@ -48,9 +48,9 @@ void AssetsManager::AddTexture(const std::string& assetId, const std::string& fi
 		return;
 	}
 
-	SDL_FreeSurface(surface);
+	Texture* myTexture = new Texture(texture, surface->w, surface->h, tileSize);
 
-	Texture* myTexture = new Texture(texture, width, height, tileSize);
+	SDL_FreeSurface(surface);
 
 	textures.emplace(assetId, myTexture);
 }

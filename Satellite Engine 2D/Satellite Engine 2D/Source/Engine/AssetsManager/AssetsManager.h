@@ -16,6 +16,6 @@ class AssetsManager
 		~AssetsManager();
 
 		void ClearAssets();
-		void AddTexture(const std::string& assetId, const std::string& filePath, int width, int height, int tileSize);
+		void AddTexture(const std::string& assetId, const std::string& filePath, int tileSize = 0);
 		Texture* GetTexture(const std::string& assetId) const;
 };

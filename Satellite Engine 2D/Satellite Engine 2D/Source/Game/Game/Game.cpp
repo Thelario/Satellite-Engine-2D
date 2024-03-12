@@ -77,7 +77,7 @@ void Game::Run()
 
 void Game::Setup()
 {
-    assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png", 192, 128, 64);
+    assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png");
 }
 
 void Game::ProcessInput()
