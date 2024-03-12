@@ -11,6 +11,7 @@ class Texture
 		int tileSize;
 
 	public:
+		Texture(SDL_Texture* texture, int width, int height);
 		Texture(SDL_Texture* texture, int width, int height, int tileSize);
 		~Texture();
 
@@ -18,5 +19,6 @@ class Texture
 		int GetWidth();
 		int GetHeight();
 		int GetTileSize();
-		const SDL_Rect GetSourceRect(int id);
+		const SDL_Rect GetSourceRect();
+		const SDL_Rect GetTileSourceRect(int id);
 };

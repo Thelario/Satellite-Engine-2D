@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "../../Engine/Logger/Logger.h"
 #include "../../Engine/Rendering/Sprite.h"
+#include "../../Engine/InputManager/InputManager.h"
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
@@ -60,6 +61,10 @@ void Game::Initialize()
 
 void Game::Run()
 {
+    if (isRunning == false) {
+        return;
+    }
+
     Setup();
 
     while (isRunning)
@@ -83,15 +88,40 @@ void Game::ProcessInput()
     {
         switch (event.type)
         {
-            case SDL_QUIT: // When the user presses the X button on the windows
+            case SDL_QUIT:
                 isRunning = false;
                 break;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym)
                 {
-                    case SDLK_ESCAPE:
-                        //isRunning = false;
-                        spriteId++;
+                    case SDLK_a:
+                        InputManager::SetKey(KeyCode::A, true);
+                        break;
+                    case SDLK_w:
+                        InputManager::SetKey(KeyCode::W, true);
+                        break;
+                    case SDLK_s:
+                        InputManager::SetKey(KeyCode::S, true);
+                        break;
+                    case SDLK_d:
+                        InputManager::SetKey(KeyCode::D, true);
+                        break;
+                }
+                break;
+            case SDL_KEYUP:
+                switch (event.key.keysym.sym)
+                {
+                    case SDLK_a:
+                        InputManager::SetKey(KeyCode::A, false);
+                        break;
+                    case SDLK_w:
+                        InputManager::SetKey(KeyCode::W, false);
+                        break;
+                    case SDLK_s:
+                        InputManager::SetKey(KeyCode::S, false);
+                        break;
+                    case SDLK_d:
+                        InputManager::SetKey(KeyCode::D, false);
                         break;
                 }
                 break;
@@ -101,7 +131,7 @@ void Game::ProcessInput()
 
 void Game::Update()
 {
-    // TODO: update all our objects
+
 }
 
 void Game::Render()
@@ -111,28 +141,7 @@ void Game::Render()
 
     // TODO: render all our objects
 
-    Sprite* sprite = new Sprite("dice-one-image", 64, 64, 0, Color(150, 0, 0, 255));
-
-    Texture* texture = assetsManager->GetTexture(sprite->GetAssetId());
-
-    SDL_Rect src = texture->GetSourceRect(spriteId % 6);
-
-    SDL_Rect dest = {
-        static_cast<int>((SCREEN_WIDTH / 2) - texture->GetTileSize()),
-        static_cast<int>((SCREEN_HEIGHT / 2) - texture->GetTileSize()),
-        static_cast<int>(texture->GetTileSize() * 2),
-        static_cast<int>(texture->GetTileSize() * 2)
-    };
-
-    Color spriteColor = sprite->GetColor();
-
-    SDL_SetRenderDrawColor(renderer, spriteColor.r, spriteColor.g, spriteColor.b, spriteColor.a);
-
-    SDL_RenderCopy(renderer, texture->GetTexture(), &src, &dest);
-
     SDL_RenderPresent(renderer); // Swaping back and front buffers
-
-    delete sprite;
 }
 
 void Game::Destroy()

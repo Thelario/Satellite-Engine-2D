@@ -6,8 +6,6 @@
 class Game
 {
 	private:
-		int spriteId = 0;
-
 		bool isRunning;
 		bool debug;
 

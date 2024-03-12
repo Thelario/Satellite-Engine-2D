@@ -1,6 +1,14 @@
 #include "Texture.h"
 #include "../Logger/Logger.h"
 
+Texture::Texture(SDL_Texture* texture, int width, int height)
+{
+	this->texture = texture;
+	this->width = width;
+	this->height = height;
+	this->tileSize = 0;
+}
+
 Texture::Texture(SDL_Texture* texture, int width, int height, int tileSize)
 {
 	this->texture = texture;
@@ -19,7 +27,20 @@ int Texture::GetHeight() { return height; }
 
 int Texture::GetTileSize() { return tileSize; }
 
-const SDL_Rect Texture::GetSourceRect(int id)
+const SDL_Rect Texture::GetSourceRect()
+{
+	SDL_Rect srcRect =
+	{
+		0,
+		0,
+		width,
+		height
+	};
+
+	return srcRect;
+}
+
+const SDL_Rect Texture::GetTileSourceRect(int id)
 {
 	int columns = width / tileSize;
 	int rows = height / tileSize;
