@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "../../Engine/Logger/Logger.h"
-#include "../../Engine/Rendering/Sprite.h"
 #include "../../Engine/InputManager/InputManager.h"
+#include "Objects/Dice.h"
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
@@ -77,7 +77,20 @@ void Game::Run()
 
 void Game::Setup()
 {
-    assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png");
+    assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png", 64);
+
+    GameObject* diceOne = new Dice(glm::vec2(32, SCREEN_HEIGHT - 96), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
+        Color(255, 255, 255, 255), false, assetsManager, 0, 250);
+
+    GameObject* diceTwo = new Dice(glm::vec2(128, SCREEN_HEIGHT - 96), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
+        Color(255, 255, 255, 255), false, assetsManager, 2, 250);
+
+    GameObject* diceThree = new Dice(glm::vec2(128 + 96, SCREEN_HEIGHT - 96), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
+        Color(255, 255, 255, 255), false, assetsManager, 4, 250);
+
+    gameObjects.push_back(diceOne);
+    gameObjects.push_back(diceTwo);
+    gameObjects.push_back(diceThree);
 }
 
 void Game::ProcessInput()
@@ -125,13 +138,19 @@ void Game::ProcessInput()
                         break;
                 }
                 break;
+            case SDL_MOUSEMOTION:
+                InputManager::SetMousePosition(glm::vec2(event.motion.x, event.motion.y));
+                break;
         }
     }
 }
 
 void Game::Update()
 {
-
+    for (GameObject* gameObject : gameObjects)
+    {
+        gameObject->Update();
+    }
 }
 
 void Game::Render()
@@ -139,13 +158,21 @@ void Game::Render()
     SDL_SetRenderDrawColor(renderer, 14, 23, 33, 255);
     SDL_RenderClear(renderer);
 
-    // TODO: render all our objects
+    for (GameObject* gameObject : gameObjects)
+    {
+        gameObject->Render(renderer);
+    }
 
     SDL_RenderPresent(renderer); // Swaping back and front buffers
 }
 
 void Game::Destroy()
 {
+    for (GameObject* gameObject : gameObjects)
+    {
+        delete gameObject;
+    }
+
     delete assetsManager;
 
     SDL_DestroyWindow(window);

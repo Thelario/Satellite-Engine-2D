@@ -1,7 +1,9 @@
 #pragma once
 
 #include <SDL.h>
+#include <vector>
 #include "../../Engine/AssetsManager/AssetsManager.h"
+#include "../../Engine/GameObject/GameObject.h"
 
 class Game
 {
@@ -12,6 +14,7 @@ class Game
 		SDL_Window* window;
 		SDL_Renderer* renderer;
 		AssetsManager* assetsManager;
+		std::vector<GameObject*> gameObjects;
 
 		void Initialize();
 		void Setup();

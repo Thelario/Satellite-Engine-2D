@@ -1,5 +1,6 @@
 #pragma once
 
+#include <glm/glm.hpp>
 #include <unordered_map>
 
 // TODO: implementar un método que convierta el KeyCode a string para poder loggear con el valor de la key
@@ -14,8 +15,12 @@ static class InputManager
 {
 	private:
 		static std::unordered_map<KeyCode, bool> keys;
+		static glm::vec2 mousePosition;
 
 	public:
 		static void SetKey(KeyCode keyCode, bool value);
 		static bool GetKey(KeyCode keyCode);
+
+		static void SetMousePosition(glm::vec2 mousePos);
+		static glm::vec2 GetMousePosition();
 };
