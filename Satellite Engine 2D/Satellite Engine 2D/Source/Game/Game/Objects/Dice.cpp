@@ -17,10 +17,13 @@ void Dice::Update()
 {
 	glm::vec2 mousePosition = InputManager::GetMousePosition();
 
-	bool mouseOverDice = (position.x                    < mousePosition.x &&
-						  position.x + width * scale.x  > mousePosition.x &&
-						  position.y                    < mousePosition.y &&
-						  position.y + height * scale.y > mousePosition.y);
+	float half_width_x = (width * scale.x) / 2;
+	float half_height_y = (height * scale.y) / 2;
+
+	bool mouseOverDice = (position.x - half_width_x  < mousePosition.x &&
+						  position.x + half_width_x  > mousePosition.x &&
+						  position.y - half_height_y < mousePosition.y &&
+						  position.y + half_height_y > mousePosition.y);
 
 	if (mouseOverDice == false)
 	{
@@ -28,7 +31,7 @@ void Dice::Update()
 		return;
 	}
 
-	scale = glm::vec2(1.1);
+	scale = glm::vec2(1.2);
 
 	//glm::vec2 offset = glm::vec2((scale.x * width - scale.x) / 2, (scale.y * height - scale.y) / 2);
 
@@ -51,11 +54,14 @@ void Dice::Render(SDL_Renderer* renderer)
 
 	SDL_Rect src = texture->GetTileSourceRect(face);
 
+	float width_x = width * scale.x;
+	float height_y = height * scale.y;
+
 	SDL_Rect dest = {
-		static_cast<int>(position.x),
-		static_cast<int>(position.y),
-		static_cast<int>(width * scale.x),
-		static_cast<int>(height * scale.y)
+		static_cast<int>(position.x - (width_x / 2)),
+		static_cast<int>(position.y - (height_y / 2)),
+		static_cast<int>(width_x),
+		static_cast<int>(height_y)
 	};
 
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);

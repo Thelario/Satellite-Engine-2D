@@ -79,13 +79,13 @@ void Game::Setup()
 {
     assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png", 64);
 
-    GameObject* diceOne = new Dice(glm::vec2(32, SCREEN_HEIGHT - 96), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
+    GameObject* diceOne = new Dice(glm::vec2(64, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
         Color(255, 255, 255, 255), false, assetsManager, 0, 250);
 
-    GameObject* diceTwo = new Dice(glm::vec2(128, SCREEN_HEIGHT - 96), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
+    GameObject* diceTwo = new Dice(glm::vec2(160, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
         Color(255, 255, 255, 255), false, assetsManager, 2, 250);
 
-    GameObject* diceThree = new Dice(glm::vec2(128 + 96, SCREEN_HEIGHT - 96), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
+    GameObject* diceThree = new Dice(glm::vec2(160 + 96, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
         Color(255, 255, 255, 255), false, assetsManager, 4, 250);
 
     gameObjects.push_back(diceOne);
