@@ -1,6 +1,4 @@
 #include "Game.h"
-#include "../../Engine/Logger/Logger.h"
-#include "../../Engine/InputManager/InputManager.h"
 #include "Objects/Dice.h"
 
 const int SCREEN_WIDTH = 1080;
@@ -20,7 +18,7 @@ Game::~Game()
 
 void Game::Initialize()
 {
-    isRunning = false;
+    is_running = false;
     debug = false;
 
     // Initializing SDL
@@ -54,20 +52,23 @@ void Game::Initialize()
         return;
     }
 
-    isRunning = true;
+    // Initializing the rest of the systems
 
-    assetsManager = new AssetsManager(renderer);
+    is_running = true;
+
+    assets_manager = new AssetsManager(renderer);
+    scene_manager = new SceneManager(renderer);
 }
 
 void Game::Run()
 {
-    if (isRunning == false) {
+    if (is_running == false) {
         return;
     }
 
     Setup();
 
-    while (isRunning)
+    while (is_running)
     {
         ProcessInput();
         Update();
@@ -77,20 +78,24 @@ void Game::Run()
 
 void Game::Setup()
 {
-    assetsManager->AddTexture("dice-one-image", "./Assets/dice_one.png", 64);
+    assets_manager->AddTexture("dice-one-image", "./Assets/dice_one.png", 64);
 
+    scene_manager->Start();
+
+    /*
     GameObject* diceOne = new Dice(glm::vec2(64, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assetsManager, 0, 250);
+        Color(255, 255, 255, 255), false, assets_manager, 0, 250);
 
     GameObject* diceTwo = new Dice(glm::vec2(160, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assetsManager, 2, 250);
+        Color(255, 255, 255, 255), false, assets_manager, 2, 250);
 
     GameObject* diceThree = new Dice(glm::vec2(160 + 96, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assetsManager, 4, 250);
+        Color(255, 255, 255, 255), false, assets_manager, 4, 250);
 
-    gameObjects.push_back(diceOne);
-    gameObjects.push_back(diceTwo);
-    gameObjects.push_back(diceThree);
+    game_objects.push_back(diceOne);
+    game_objects.push_back(diceTwo);
+    game_objects.push_back(diceThree);
+    */
 }
 
 void Game::ProcessInput()
@@ -102,7 +107,7 @@ void Game::ProcessInput()
         switch (event.type)
         {
             case SDL_QUIT:
-                isRunning = false;
+                is_running = false;
                 break;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym)
@@ -147,10 +152,7 @@ void Game::ProcessInput()
 
 void Game::Update()
 {
-    for (GameObject* gameObject : gameObjects)
-    {
-        gameObject->Update();
-    }
+    scene_manager->Update();
 }
 
 void Game::Render()
@@ -158,22 +160,15 @@ void Game::Render()
     SDL_SetRenderDrawColor(renderer, 14, 23, 33, 255);
     SDL_RenderClear(renderer);
 
-    for (GameObject* gameObject : gameObjects)
-    {
-        gameObject->Render(renderer);
-    }
+    scene_manager->Render();
 
     SDL_RenderPresent(renderer); // Swaping back and front buffers
 }
 
 void Game::Destroy()
 {
-    for (GameObject* gameObject : gameObjects)
-    {
-        delete gameObject;
-    }
-
-    delete assetsManager;
+    delete scene_manager;
+    delete assets_manager;
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);

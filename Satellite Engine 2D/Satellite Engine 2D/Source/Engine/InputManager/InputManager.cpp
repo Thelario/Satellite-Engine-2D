@@ -33,15 +33,15 @@ std::unordered_map<KeyCode, bool> InputManager::keys =
 	{ KeyCode::Z, false }
 };
 
-glm::vec2 InputManager::mousePosition = glm::vec2(0);
+glm::vec2 InputManager::mouse_position = glm::vec2(0);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Setting the keys' states
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void InputManager::SetKey(KeyCode keyCode, bool value)
+void InputManager::SetKey(KeyCode key_code, bool value)
 {
-	auto key = keys.find(keyCode);
+	auto key = keys.find(key_code);
 
 	if (key == keys.end()) {
 		Logger::Error("The key couldn't be found!!!");
@@ -55,9 +55,9 @@ void InputManager::SetKey(KeyCode keyCode, bool value)
 /// Getting the keys' states
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool InputManager::GetKey(KeyCode keyCode)
+bool InputManager::GetKey(KeyCode key_code)
 {
-	auto key = keys.find(keyCode);
+	auto key = keys.find(key_code);
 
 	if (key == keys.end()) {
 		Logger::Error("The key couldn't be found!!!");
@@ -71,12 +71,12 @@ bool InputManager::GetKey(KeyCode keyCode)
 /// Setting and getting mouse position
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void InputManager::SetMousePosition(glm::vec2 mousePos)
+void InputManager::SetMousePosition(glm::vec2 mouse_pos)
 {
-	mousePosition = mousePos;
+	mouse_position = mouse_pos;
 }
 
 glm::vec2 InputManager::GetMousePosition()
 {
-	return mousePosition;
+	return mouse_position;
 }

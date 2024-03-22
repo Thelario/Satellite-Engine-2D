@@ -26,15 +26,15 @@ void AssetsManager::ClearAssets()
 	textures.clear();
 }
 
-void AssetsManager::AddTexture(const std::string& assetId, const std::string& filePath, int tileSize)
+void AssetsManager::AddTexture(const std::string& asset_id, const std::string& file_path, int tile_size)
 {
 	// Create a surface based on the imgage file in the file path specified
 
-	SDL_Surface* surface = IMG_Load(filePath.c_str());
+	SDL_Surface* surface = IMG_Load(file_path.c_str());
 
 	if (surface == NULL)
 	{
-		Logger::Error("A problem occured when loading image with " + assetId + " in file path " + filePath, SDL_GetError());
+		Logger::Error("A problem occured when loading image with " + asset_id + " in file path " + file_path, SDL_GetError());
 		return;
 	}
 
@@ -44,24 +44,24 @@ void AssetsManager::AddTexture(const std::string& assetId, const std::string& fi
 
 	if (texture == NULL)
 	{
-		Logger::Error("A problem occured when creating a texture from image with " + assetId + " in file path " + filePath, SDL_GetError());
+		Logger::Error("A problem occured when creating a texture from image with " + asset_id + " in file path " + file_path, SDL_GetError());
 		return;
 	}
 
-	Texture* myTexture = new Texture(texture, surface->w, surface->h, tileSize);
+	Texture* my_texture = new Texture(texture, surface->w, surface->h, tile_size);
 
 	SDL_FreeSurface(surface);
 
-	textures.emplace(assetId, myTexture);
+	textures.emplace(asset_id, my_texture);
 }
 
-Texture* AssetsManager::GetTexture(const std::string& assetId) const
+Texture* AssetsManager::GetTexture(const std::string& asset_id) const
 {
-	if (textures.find(assetId) == textures.end())
+	if (textures.find(asset_id) == textures.end())
 	{
-		Logger::Error("Trying to get a texture with a wrong asset id: " + assetId);
+		Logger::Error("Trying to get a texture with a wrong asset id: " + asset_id);
 		return nullptr;
 	}
 
-	return textures.at(assetId);
+	return textures.at(asset_id);
 }

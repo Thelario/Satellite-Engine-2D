@@ -6,15 +6,15 @@ Texture::Texture(SDL_Texture* texture, int width, int height)
 	this->texture = texture;
 	this->width = width;
 	this->height = height;
-	this->tileSize = 0;
+	this->tile_size = 0;
 }
 
-Texture::Texture(SDL_Texture* texture, int width, int height, int tileSize)
+Texture::Texture(SDL_Texture* texture, int width, int height, int tile_size)
 {
 	this->texture = texture;
 	this->width = width;
 	this->height = height;
-	this->tileSize = tileSize;
+	this->tile_size = tile_size;
 }
 
 Texture::~Texture() { SDL_DestroyTexture(texture); }
@@ -25,7 +25,7 @@ int Texture::GetWidth() { return width; }
 
 int Texture::GetHeight() { return height; }
 
-int Texture::GetTileSize() { return tileSize; }
+int Texture::GetTileSize() { return tile_size; }
 
 const SDL_Rect Texture::GetSourceRect()
 {
@@ -42,14 +42,14 @@ const SDL_Rect Texture::GetSourceRect()
 
 const SDL_Rect Texture::GetTileSourceRect(int id)
 {
-	if (tileSize == 0)
+	if (tile_size == 0)
 	{
 		Logger::Error("The current texture has a tileSize of 0, which means that it is not a tileSet and just a single image.");
 		return { 0, 0, 0, 0 };
 	}
 
-	int columns = width / tileSize;
-	int rows = height / tileSize;
+	int columns = width / tile_size;
+	int rows = height / tile_size;
 
 	if (id < 0 || id > columns * rows)
 	{
@@ -59,13 +59,13 @@ const SDL_Rect Texture::GetTileSourceRect(int id)
 	int row = id % columns;
 	int column = id / columns;
 
-	SDL_Rect srcRect =
+	SDL_Rect src_rect =
 	{
-		row * tileSize,
-		column * tileSize,
-		tileSize,
-		tileSize
+		row * tile_size,
+		column * tile_size,
+		tile_size,
+		tile_size
 	};
 
-	return srcRect;
+	return src_rect;
 }

@@ -15,12 +15,12 @@ static class InputManager
 {
 	private:
 		static std::unordered_map<KeyCode, bool> keys;
-		static glm::vec2 mousePosition;
+		static glm::vec2 mouse_position;
 
 	public:
-		static void SetKey(KeyCode keyCode, bool value);
-		static bool GetKey(KeyCode keyCode);
+		static void SetKey(KeyCode key_code, bool value);
+		static bool GetKey(KeyCode key_code);
 
-		static void SetMousePosition(glm::vec2 mousePos);
+		static void SetMousePosition(glm::vec2 mouse_pos);
 		static glm::vec2 GetMousePosition();
 };

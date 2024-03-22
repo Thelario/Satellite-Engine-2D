@@ -8,11 +8,11 @@ class Texture
 		SDL_Texture* texture;
 		int width;
 		int height;
-		int tileSize;
+		int tile_size;
 
 	public:
 		Texture(SDL_Texture* texture, int width, int height);
-		Texture(SDL_Texture* texture, int width, int height, int tileSize);
+		Texture(SDL_Texture* texture, int width, int height, int tile_size);
 		~Texture();
 
 		SDL_Texture* GetTexture();

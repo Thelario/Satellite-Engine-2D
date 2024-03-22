@@ -2,19 +2,18 @@
 
 #include <SDL.h>
 #include <vector>
-#include "../../Engine/AssetsManager/AssetsManager.h"
-#include "../../Engine/GameObject/GameObject.h"
+#include "../Engine.h"
 
 class Game
 {
 	private:
-		bool isRunning;
+		bool is_running;
 		bool debug;
 
 		SDL_Window* window;
 		SDL_Renderer* renderer;
-		AssetsManager* assetsManager;
-		std::vector<GameObject*> gameObjects;
+		AssetsManager* assets_manager;
+		SceneManager* scene_manager;
 
 		void Initialize();
 		void Setup();

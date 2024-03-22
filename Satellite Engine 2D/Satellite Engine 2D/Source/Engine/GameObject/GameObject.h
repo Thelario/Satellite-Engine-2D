@@ -8,23 +8,31 @@
 class GameObject
 {
 	protected:
+
+		// Transform data
+
 		glm::vec2 position;
 		glm::vec2 scale;
 		double rotation;
-		std::string assetId;
+
+		// Sprite data
+
+		std::string asset_id;
 		int width;
 		int height;
-		int zIndex;
-		bool flipX;
+		int z_index;
+		bool flip_x;
 		Color color;
 		Texture* texture;
 
 	public:
-		GameObject(glm::vec2 position = glm::vec2(0), glm::vec2 scale = glm::vec2(0), double rotation = 0, std::string assetId = "", int width = 0,
-			int height = 0, int zIndex = 0, Color color = Color(255, 255, 255, 255), bool flipX = false, AssetsManager* assetsManager = nullptr);
+		GameObject(glm::vec2 position = glm::vec2(0), glm::vec2 scale = glm::vec2(0), double rotation = 0, std::string asset_id = "", int width = 0,
+			int height = 0, int z_index = 0, Color color = Color(255, 255, 255, 255), bool flip_x = false, AssetsManager* assets_manager = nullptr);
 		virtual ~GameObject() = default;
 
 		virtual void Start();
 		virtual void Update();
 		virtual void Render(SDL_Renderer* renderer);
+
+		virtual void SetPosition(glm::vec2 position);
 };

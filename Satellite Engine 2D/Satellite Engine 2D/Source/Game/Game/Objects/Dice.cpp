@@ -2,12 +2,13 @@
 #include <SDL.h>
 #include "../../../Engine/InputManager/InputManager.h"
 
-Dice::Dice(glm::vec2 position, glm::vec2 scale, double rotation, std::string assetId,
-	int width, int height, int zIndex, Color color, bool flipX, AssetsManager* assetsManager, int face, Uint32 timeRate)
-	: GameObject(position, scale, rotation, assetId, width, height, zIndex, color, flipX, assetsManager)
+Dice::Dice(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id,
+	int width, int height, int z_index, Color color, bool flip_x, AssetsManager* assets_manager, int face, Uint32 time_rate)
+	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
+	this->using_dice = false;
 	this->face = face;
-	this->timeRate = timeRate;
+	this->time_rate = time_rate;
 	this->time = SDL_GetTicks();
 }
 
@@ -15,33 +16,42 @@ void Dice::Start() { }
 
 void Dice::Update()
 {
-	glm::vec2 mousePosition = InputManager::GetMousePosition();
-
-	float half_width_x = (width * scale.x) / 2;
-	float half_height_y = (height * scale.y) / 2;
-
-	bool mouseOverDice = (position.x - half_width_x  < mousePosition.x &&
-						  position.x + half_width_x  > mousePosition.x &&
-						  position.y - half_height_y < mousePosition.y &&
-						  position.y + half_height_y > mousePosition.y);
-
-	if (mouseOverDice == false)
+	if (using_dice == false)
 	{
-		scale = glm::vec2(1);
-		return;
+		// Checking if mouse is over dice
+
+		glm::vec2 mouse_position = InputManager::GetMousePosition();
+
+		float half_width_x = (width * scale.x) / 2;
+		float half_height_y = (height * scale.y) / 2;
+
+		bool mouse_over_dice = (position.x - half_width_x  < mouse_position.x &&
+								position.x + half_width_x  > mouse_position.x &&
+								position.y - half_height_y < mouse_position.y &&
+								position.y + half_height_y > mouse_position.y);
+
+		if (mouse_over_dice == false)
+		{
+			scale = glm::vec2(1);
+			return;
+		}
+
+		scale = glm::vec2(1.2);
+
+		// Check if 
 	}
 
-	scale = glm::vec2(1.2);
+
 
 	//glm::vec2 offset = glm::vec2((scale.x * width - scale.x) / 2, (scale.y * height - scale.y) / 2);
 
 	//position -= offset;
 
-	Uint32 currentTime = SDL_GetTicks();
+	Uint32 current_time = SDL_GetTicks();
 
-	if (time + timeRate < currentTime)
+	if (time + time_rate < current_time)
 	{
-		time = currentTime;
+		time = current_time;
 		face = (face + 1) % 6;
 	}
 }
@@ -66,7 +76,12 @@ void Dice::Render(SDL_Renderer* renderer)
 
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
-	SDL_RendererFlip flip = flipX ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+	SDL_RendererFlip flip = flip_x ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 
 	SDL_RenderCopyEx(renderer, texture->GetTexture(), &src, &dest, rotation, NULL, flip);
+}
+
+void Dice::UseDice()
+{
+
 }
