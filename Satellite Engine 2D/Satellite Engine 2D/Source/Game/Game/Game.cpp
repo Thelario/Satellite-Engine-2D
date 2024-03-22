@@ -102,8 +102,12 @@ void Game::ProcessInput()
 {
     SDL_Event event;
 
+    InputManager::SetMouseButtonUp(0, false);
+    InputManager::SetMouseButtonUp(1, false);
+
     while (SDL_PollEvent(&event)) // Iterating through all the possible events that might have happened in this frame
     {
+        Uint32 buttonState = SDL_GetMouseState(NULL, NULL);
         switch (event.type)
         {
             case SDL_QUIT:
@@ -145,6 +149,30 @@ void Game::ProcessInput()
                 break;
             case SDL_MOUSEMOTION:
                 InputManager::SetMousePosition(glm::vec2(event.motion.x, event.motion.y));
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                switch (event.button.button)
+                {
+                    case SDL_BUTTON_LEFT:
+                        InputManager::SetMouseButtonDown(0, true);
+                        break;
+                    case SDL_BUTTON_RIGHT:
+                        InputManager::SetMouseButtonDown(1, true);
+                        break;
+                }
+                break;
+            case SDL_MOUSEBUTTONUP:
+                switch (event.button.button)
+                {
+                    case SDL_BUTTON_LEFT:
+                        InputManager::SetMouseButtonDown(0, false);
+                        InputManager::SetMouseButtonUp(0, true);
+                        break;
+                    case SDL_BUTTON_RIGHT:
+                        InputManager::SetMouseButtonDown(1, false);
+                        InputManager::SetMouseButtonUp(1, true);
+                        break;
+                }
                 break;
         }
     }
