@@ -1,15 +1,21 @@
 #include "Dice.h"
 #include <SDL.h>
-#include "../../../Engine/InputManager/InputManager.h"
 
 Dice::Dice(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id,
-	int width, int height, int z_index, Color color, bool flip_x, AssetsManager* assets_manager, int face, Uint32 time_rate)
+	int width, int height, int z_index, Color color, bool flip_x,
+	AssetsManager* assets_manager, int face, Uint32 time_rate, glm::vec2 screen_center)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
+	this->rotating_dice = false;
 	this->using_dice = false;
+	this->move_speed = 1;
 	this->face = face;
 	this->time_rate = time_rate;
+	this->screen_center = screen_center;
 	this->time = SDL_GetTicks();
+
+	this->direction = screen_center - position;
+	this->direction = glm::normalize(direction);
 }
 
 void Dice::Start() { }
@@ -18,41 +24,11 @@ void Dice::Update()
 {
 	if (using_dice == false)
 	{
-		// Checking if mouse is over dice
-
-		glm::vec2 mouse_position = InputManager::GetMousePosition();
-
-		float half_width_x = (width * scale.x) / 2;
-		float half_height_y = (height * scale.y) / 2;
-
-		bool mouse_over_dice = (position.x - half_width_x  < mouse_position.x &&
-								position.x + half_width_x  > mouse_position.x &&
-								position.y - half_height_y < mouse_position.y &&
-								position.y + half_height_y > mouse_position.y);
-
-		if (mouse_over_dice == false)
-		{
-			scale = glm::vec2(1);
-			return;
-		}
-
-		scale = glm::vec2(1.2);
-
-		// Check if 
+		CheckMouseOverDice();
 	}
-
-
-
-	//glm::vec2 offset = glm::vec2((scale.x * width - scale.x) / 2, (scale.y * height - scale.y) / 2);
-
-	//position -= offset;
-
-	Uint32 current_time = SDL_GetTicks();
-
-	if (time + time_rate < current_time)
+	else
 	{
-		time = current_time;
-		face = (face + 1) % 6;
+		UseDice();
 	}
 }
 
@@ -83,5 +59,53 @@ void Dice::Render(SDL_Renderer* renderer)
 
 void Dice::UseDice()
 {
+	float distance = glm::distance(screen_center, position);
 
+	Logger::Log("Distance from center: " + std::to_string(distance));
+
+	if (distance > 5)
+	{
+		position = move_speed * direction;
+	}
+	else
+	{
+		Uint32 current_time = SDL_GetTicks();
+
+		if (time + time_rate < current_time)
+		{
+			time = current_time;
+			face = (face + 1) % 6;
+		}
+	}
+}
+
+void Dice::CheckMouseOverDice()
+{
+	// Checking if mouse is over dice
+
+	glm::vec2 mouse_position = InputManager::GetMousePosition();
+
+	float half_width_x = (width * scale.x) / 2;
+	float half_height_y = (height * scale.y) / 2;
+
+	bool mouse_over_dice = (position.x - half_width_x  < mouse_position.x &&
+							position.x + half_width_x  > mouse_position.x &&
+							position.y - half_height_y < mouse_position.y &&
+							position.y + half_height_y > mouse_position.y);
+
+	if (mouse_over_dice == false)
+	{
+		scale = glm::vec2(1);
+		return;
+	}
+
+	scale = glm::vec2(1.2);
+
+	// Check if the player presses the dice
+
+	if (InputManager::GetMouseButtonDown(0))
+	{
+		using_dice = true;
+		scale = glm::vec2(1);
+	}
 }

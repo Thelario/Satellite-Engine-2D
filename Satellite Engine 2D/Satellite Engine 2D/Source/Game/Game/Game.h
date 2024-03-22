@@ -14,6 +14,7 @@ class Game
 		SDL_Renderer* renderer;
 		AssetsManager* assets_manager;
 		SceneManager* scene_manager;
+		std::vector<GameObject*> game_objects;
 
 		void Initialize();
 		void Setup();

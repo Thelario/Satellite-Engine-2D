@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "../Logger/Logger.h"
+#include "../../Game/Game/Objects/Dice.h"
 
 Scene::Scene(int scene_id, SDL_Renderer* renderer)
 {

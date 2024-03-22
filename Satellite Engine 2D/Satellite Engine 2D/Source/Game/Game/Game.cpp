@@ -82,20 +82,18 @@ void Game::Setup()
 
     scene_manager->Start();
 
-    /*
     GameObject* diceOne = new Dice(glm::vec2(64, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assets_manager, 0, 250);
+        Color(255, 255, 255, 255), false, assets_manager, 0, 250, glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
 
     GameObject* diceTwo = new Dice(glm::vec2(160, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assets_manager, 2, 250);
+        Color(255, 255, 255, 255), false, assets_manager, 2, 250, glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
 
     GameObject* diceThree = new Dice(glm::vec2(160 + 96, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assets_manager, 4, 250);
+        Color(255, 255, 255, 255), false, assets_manager, 4, 250, glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
 
     game_objects.push_back(diceOne);
     game_objects.push_back(diceTwo);
     game_objects.push_back(diceThree);
-    */
 }
 
 void Game::ProcessInput()
@@ -180,6 +178,11 @@ void Game::ProcessInput()
 
 void Game::Update()
 {
+    for (GameObject* go : game_objects)
+    {
+        go->Update();
+    }
+
     scene_manager->Update();
 }
 
@@ -188,13 +191,21 @@ void Game::Render()
     SDL_SetRenderDrawColor(renderer, 14, 23, 33, 255);
     SDL_RenderClear(renderer);
 
-    scene_manager->Render();
+    for (GameObject* go : game_objects)
+    {
+        go->Render(renderer);
+    }
 
     SDL_RenderPresent(renderer); // Swaping back and front buffers
 }
 
 void Game::Destroy()
 {
+    for (GameObject* go : game_objects)
+    {
+        delete go;
+    }
+
     delete scene_manager;
     delete assets_manager;
 
