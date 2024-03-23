@@ -19,4 +19,8 @@ class BattleRoom : public GameObject
 		void Render(SDL_Renderer* renderer) override;
 
 		void ConfigureRoom(GameObject* player, GameObject* enemy);
+		
+		static void AttackPlayer(int damage);
+		static void ShieldPlayer(int defense);
+		static void AttackEnemy(int damage);
 };

@@ -19,7 +19,7 @@ SceneManager::SceneManager(SDL_Renderer* renderer)
 
 SceneManager::~SceneManager()
 {
-	for (int i = 0; i < scenes.size(); i++)
+	for (auto i = 0; i < scenes.size(); i++)
 	{
 		delete scenes[i];
 	}

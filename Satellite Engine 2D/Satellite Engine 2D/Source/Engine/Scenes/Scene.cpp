@@ -10,7 +10,7 @@ Scene::Scene(int scene_id, SDL_Renderer* renderer)
 
 Scene::~Scene()
 {
-	for (int i = 0; i < game_objects.size(); i++)
+	for (auto i = 0; i < game_objects.size(); i++)
 	{
 		delete game_objects[i];
 	}
@@ -22,7 +22,7 @@ void Scene::Start()
 {
 	Logger::Log("Starting scene " + std::to_string(scene_id));
 
-	for (int i = 0; i < game_objects.size(); i++)
+	for (auto i = 0; i < game_objects.size(); i++)
 	{
 		game_objects[i]->Start();
 	}
@@ -30,7 +30,7 @@ void Scene::Start()
 
 void Scene::Update()
 {
-	for (int i = 0; i < game_objects.size(); i++)
+	for (auto i = 0; i < game_objects.size(); i++)
 	{
 		game_objects[i]->Update();
 	}
@@ -38,7 +38,7 @@ void Scene::Update()
 
 void Scene::Render()
 {
-	for (int i = 0; i < game_objects.size(); i++)
+	for (auto i = 0; i < game_objects.size(); i++)
 	{
 		game_objects[i]->Render(renderer);
 	}

@@ -11,7 +11,7 @@ enum class KeyCode
 	ESCAPE, TAB, CTRL, ALT, INTRO, ZERO, ONE, TWO, THREE, FOUR, FIVE, SIXE, SEVEN, EIGHT, NINE
 };
 
-static class InputManager
+class InputManager
 {
 	private:
 		static std::unordered_map<KeyCode, bool> keys;

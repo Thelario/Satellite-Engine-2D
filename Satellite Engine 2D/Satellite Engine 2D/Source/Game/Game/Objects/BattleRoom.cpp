@@ -23,3 +23,18 @@ void BattleRoom::ConfigureRoom(GameObject* player, GameObject* enemy)
 
 	
 }
+
+void BattleRoom::AttackPlayer(int damage)
+{
+
+}
+
+void BattleRoom::ShieldPlayer(int defense)
+{
+
+}
+
+void BattleRoom::AttackEnemy(int damage)
+{
+
+}

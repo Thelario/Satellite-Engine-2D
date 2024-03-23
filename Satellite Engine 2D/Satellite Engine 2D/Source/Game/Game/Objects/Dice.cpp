@@ -3,17 +3,17 @@
 
 Dice::Dice(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id,
 	int width, int height, int z_index, Color color, bool flip_x,
-	AssetsManager* assets_manager, int face, Uint32 time_rate, glm::vec2 screen_center)
+	AssetsManager* assets_manager, Uint32 time_rate, glm::vec2 screen_center)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
 	this->rotating_dice = false;
 	this->using_dice = false;
-	this->move_speed = 1;
-	this->face = face;
+	this->face = 0;
+	this->move_speed = 25;
+	this->time_rate_increase = 15;
 	this->time_rate = time_rate;
 	this->screen_center = screen_center;
 	this->time = SDL_GetTicks();
-
 	this->direction = screen_center - position;
 	this->direction = glm::normalize(direction);
 }
@@ -61,11 +61,9 @@ void Dice::UseDice()
 {
 	float distance = glm::distance(screen_center, position);
 
-	Logger::Log("Distance from center: " + std::to_string(distance));
-
-	if (distance > 5)
+	if (glm::abs(distance) > 20) // Move the dice if not in center
 	{
-		position = move_speed * direction;
+		position += move_speed * direction;
 	}
 	else
 	{
@@ -75,6 +73,7 @@ void Dice::UseDice()
 		{
 			time = current_time;
 			face = (face + 1) % 6;
+			time_rate += time_rate_increase;
 		}
 	}
 }
@@ -99,7 +98,7 @@ void Dice::CheckMouseOverDice()
 		return;
 	}
 
-	scale = glm::vec2(1.2);
+	scale = glm::vec2(1.2f);
 
 	// Check if the player presses the dice
 
