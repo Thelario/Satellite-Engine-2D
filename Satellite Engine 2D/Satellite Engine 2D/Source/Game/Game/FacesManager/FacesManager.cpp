@@ -8,8 +8,6 @@
 
 using json = nlohmann::json;
 
-const std::string& config_file_name = "./Config/game_config.json";
-
 FacesManager::FacesManager()
 {
 	if (LoadFaces() == true)
@@ -29,6 +27,8 @@ FacesManager::~FacesManager()
 
 bool FacesManager::LoadFaces()
 {
+	const std::string& config_file_name = "./Config/game_config.json";
+
 	std::ifstream file;
 
 	file.open(config_file_name);
@@ -41,8 +41,6 @@ bool FacesManager::LoadFaces()
 
 	json json_data = json::parse(file);
 
-	//file >> json_data; // Put the content of the file into the json_data object
-	
 	for (const auto& face : json_data["faces"])
 	{
 		Face* new_face = new Face(face["asset_id"], face["image_id"], face["face_type"], face["value"]);

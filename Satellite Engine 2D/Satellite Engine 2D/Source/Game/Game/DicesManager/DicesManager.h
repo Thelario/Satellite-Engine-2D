@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 
+#include "../FacesManager/FacesManager.h"
 #include "../Objects/Dice.h"
 
 class DicesManager
@@ -10,8 +11,10 @@ class DicesManager
 	private:
 		std::map<std::string, Dice*> dices;
 
+		FacesManager* faces_manager;
+
 	public:
-		DicesManager();
+		DicesManager(FacesManager* faces_manager);
 		~DicesManager();
 
 		bool LoadDices();
