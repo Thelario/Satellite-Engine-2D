@@ -27,7 +27,7 @@ FacesManager::~FacesManager()
 
 bool FacesManager::LoadFaces()
 {
-	const std::string& config_file_name = "./Config/game_config.json";
+	const std::string& config_file_name = "./Config/faces_config.json";
 
 	std::ifstream file;
 
@@ -54,8 +54,6 @@ bool FacesManager::LoadFaces()
 	}
 
 	file.close();
-
-	json_data.clear();
 
 	return true;
 }

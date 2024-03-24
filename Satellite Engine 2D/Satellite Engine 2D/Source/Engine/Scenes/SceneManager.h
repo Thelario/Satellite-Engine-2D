@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+
 #include "Scene.h"
 
 class SceneManager
@@ -14,7 +15,7 @@ class SceneManager
 		SceneManager(SDL_Renderer* renderer);
 		~SceneManager();
 
-		void Start();
+		void Start(std::vector<GameObject*> game_objects);
 		void Update();
 		void Render();
 

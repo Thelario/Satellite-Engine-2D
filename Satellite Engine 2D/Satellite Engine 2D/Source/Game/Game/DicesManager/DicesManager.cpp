@@ -8,9 +8,10 @@
 
 using json = nlohmann::json;
 
-DicesManager::DicesManager(FacesManager* faces_manager)
+DicesManager::DicesManager(FacesManager* faces_manager, AssetsManager* assets_manager)
 {
 	this->faces_manager = faces_manager;
+	this->assets_manager = assets_manager;
 
 	if (LoadDices() == true)
 	{
@@ -35,7 +36,7 @@ bool DicesManager::LoadDices()
 		return false;
 	}
 
-	const std::string& config_file_name = "./Config/game_config.json";
+	const std::string& config_file_name = "./Config/dices_config.json";
 
 	std::ifstream file;
 
@@ -53,7 +54,8 @@ bool DicesManager::LoadDices()
 	{
 		std::string dice_name = dice_json["name"];
 
-		Dice* dice = new Dice(dice_name);
+		Dice* dice = new Dice(dice_name, glm::vec2(1000, 90), glm::vec2(1), 0, "", 64, 64, 0, Color(255, 255, 255, 255),
+			false, assets_manager, 25, glm::vec2(540, 360));
 
 		for (const auto& face_name : dice_json["faces"])
 		{
@@ -69,8 +71,6 @@ bool DicesManager::LoadDices()
 	}
 
 	file.close();
-
-	json_data.clear();
 
 	return true;
 }

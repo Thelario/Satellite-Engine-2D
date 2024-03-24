@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+
 #include "../GameObject/GameObject.h"
 
 class Scene
@@ -11,7 +12,7 @@ class Scene
 		SDL_Renderer* renderer;
 
 	public:
-		Scene(int scene_id, SDL_Renderer* renderer);
+		Scene(int scene_id, SDL_Renderer* renderer, std::vector<GameObject*> game_objects);
 		~Scene();
 
 		void Start();

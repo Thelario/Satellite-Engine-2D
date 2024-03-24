@@ -23,7 +23,7 @@ class GameObject
 		int z_index;
 		bool flip_x;
 		Color color;
-		Texture* texture;
+		AssetsManager* assets_manager;
 
 	public:
 		GameObject(glm::vec2 position = glm::vec2(0), glm::vec2 scale = glm::vec2(0), double rotation = 0, std::string asset_id = "", int width = 0,

@@ -1,0 +1,26 @@
+{
+  "dices": [
+    {
+      "name": "dice-attack-basic",
+      "faces": [
+        "face-attack-one",
+        "face-attack-two",
+        "face-attack-three",
+        "face-attack-four",
+        "face-attack-five",
+        "face-attack-six"
+      ]
+    },
+    {
+      "name": "dice-defense-basic",
+      "faces": [
+        "face-defense-one",
+        "face-defense-two",
+        "face-defense-three",
+        "face-defense-four",
+        "face-defense-five",
+        "face-defense-six"
+      ]
+    }
+  ]
+}

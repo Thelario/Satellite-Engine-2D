@@ -3,110 +3,86 @@
     {
       "name": "face-attack-one",
       "face_type": 0,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 8,
       "value": 1
     },
     {
       "name": "face-attack-two",
       "face_type": 0,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 9,
       "value": 2
     },
     {
       "name": "face-attack-three",
       "face_type": 0,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 10,
       "value": 3
     },
     {
       "name": "face-attack-four",
       "face_type": 0,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 11,
       "value": 4
     },
     {
       "name": "face-attack-five",
       "face_type": 0,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 12,
       "value": 5
     },
     {
       "name": "face-attack-six",
       "face_type": 0,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 13,
       "value": 6
     },
     {
       "name": "face-defense-one",
       "face_type": 1,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 15,
       "value": 1
     },
     {
       "name": "face-defense-two",
       "face_type": 1,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 16,
       "value": 2
     },
     {
       "name": "face-defense-three",
       "face_type": 1,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 17,
       "value": 3
     },
     {
       "name": "face-defense-four",
       "face_type": 1,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 18,
       "value": 4
     },
     {
       "name": "face-defense-five",
       "face_type": 1,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 19,
       "value": 5
     },
     {
       "name": "face-defense-six",
       "face_type": 1,
-      "asset_id": "dices.png",
+      "asset_id": "dices-one",
       "image_id": 20,
       "value": 6
-    }
-  ],
-  "dices": [
-    {
-      "name": "dice-attack-basic",
-      "faces": [
-        "face-attack-one",
-        "face-attack-two",
-        "face-attack-three",
-        "face-attack-four",
-        "face-attack-five",
-        "face-attack-six"
-      ]
-    },
-    {
-      "name": "dice-defense-basic",
-      "faces": [
-        "face-defense-one",
-        "face-defense-two",
-        "face-defense-three",
-        "face-defense-four",
-        "face-defense-five",
-        "face-defense-six"
-      ]
     }
   ]
 }

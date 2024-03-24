@@ -20,6 +20,6 @@ class AssetsManager
 		bool LoadAssets();
 		void ClearAssets();
 
-		void AddTexture(const std::string& asset_id, const std::string& file_path, int tile_size = 0);
+		SDL_Texture* GenerateTexture(const std::string& file_path);
 		Texture* GetTexture(const std::string& asset_id) const;
 };

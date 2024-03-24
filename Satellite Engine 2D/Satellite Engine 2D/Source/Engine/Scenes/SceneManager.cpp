@@ -1,4 +1,5 @@
 #include "SceneManager.h"
+
 #include "../InputManager/InputManager.h"
 #include "../Logger/Logger.h"
 
@@ -7,14 +8,6 @@ SceneManager::SceneManager(SDL_Renderer* renderer)
 	current_scene = 0;
 
 	this->renderer = renderer;
-
-	Scene* sceneOne = new Scene(0, renderer);
-	Scene* sceneTwo = new Scene(1, renderer);
-	Scene* sceneThree = new Scene(2, renderer);
-
-	scenes.push_back(sceneOne);
-	scenes.push_back(sceneTwo);
-	scenes.push_back(sceneThree);
 }
 
 SceneManager::~SceneManager()
@@ -27,8 +20,15 @@ SceneManager::~SceneManager()
 	scenes.clear();
 }
 
-void SceneManager::Start()
+void SceneManager::Start(std::vector<GameObject*> game_objects)
 {
+	// TODO: leer de un archivo de configuración las escenas que hay y los objetos
+	// que tiene cada escena, y crearlas en base a ese archivo de configuración.
+
+	Scene* scene = new Scene(0, renderer, game_objects);
+
+	scenes.push_back(scene);
+
 	scenes[current_scene]->Start();
 }
 

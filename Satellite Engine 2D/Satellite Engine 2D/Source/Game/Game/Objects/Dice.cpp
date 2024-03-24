@@ -54,11 +54,13 @@ void Dice::Update()
 
 void Dice::Render(SDL_Renderer* renderer)
 {
-	if (texture == nullptr) {
+	if (assets_manager == nullptr) {
 		return;
 	}
 
-	SDL_Rect src = texture->GetTileSourceRect(face);
+	Texture* texture = assets_manager->GetTexture(faces[face]->asset_id);
+
+	SDL_Rect src = texture->GetTileSourceRect(faces[face]->image_id);
 
 	float width_x = width * scale.x;
 	float height_y = height * scale.y;

@@ -1,8 +1,13 @@
 #include "AssetsManager.h"
 
 #include <SDL_image.h>
+#include <iostream>
+#include <fstream>
 
+#include "../Utils/json.hpp"
 #include "../Logger/Logger.h"
+
+using json = nlohmann::json;
 
 AssetsManager::AssetsManager(SDL_Renderer* renderer)
 {
@@ -27,7 +32,34 @@ AssetsManager::~AssetsManager()
 
 bool AssetsManager::LoadAssets()
 {
-	// TODO: create a config file to load all the assets in the game
+	const std::string& config_file_name = "./Config/textures_config.json";
+
+	std::ifstream file;
+
+	file.open(config_file_name);
+
+	if (file.fail() == true)
+	{
+		Logger::Error("Failed to open file: " + config_file_name);
+		return false;
+	}
+
+	json json_data = json::parse(file);
+
+	std::string file_path = "./Assets/";
+
+	for (const auto& texture_json : json_data["textures"])
+	{
+		std::string texture_file_path = file_path + texture_json["name"].get<std::string>();
+
+		SDL_Texture* texture = GenerateTexture(texture_file_path);
+
+		Texture* my_texture = new Texture(texture, texture_json["width"], texture_json["height"], texture_json["tile_size"]);
+
+		textures.emplace(texture_json["asset_id"], my_texture);
+	}
+
+	file.close();
 
 	return true;
 }
@@ -42,7 +74,7 @@ void AssetsManager::ClearAssets()
 	textures.clear();
 }
 
-void AssetsManager::AddTexture(const std::string& asset_id, const std::string& file_path, int tile_size)
+SDL_Texture* AssetsManager::GenerateTexture(const std::string& file_path)
 {
 	// Create a surface based on the imgage file in the file path specified
 
@@ -50,8 +82,8 @@ void AssetsManager::AddTexture(const std::string& asset_id, const std::string& f
 
 	if (surface == NULL)
 	{
-		Logger::Error("A problem occured when loading image with " + asset_id + " in file path " + file_path, SDL_GetError());
-		return;
+		Logger::Error("A problem occured when loading image with in file path " + file_path, SDL_GetError());
+		return nullptr;
 	}
 
 	// Created a texture based on the 
@@ -60,15 +92,13 @@ void AssetsManager::AddTexture(const std::string& asset_id, const std::string& f
 
 	if (texture == NULL)
 	{
-		Logger::Error("A problem occured when creating a texture from image with " + asset_id + " in file path " + file_path, SDL_GetError());
-		return;
+		Logger::Error("A problem occured when creating a texture from image in file path " + file_path, SDL_GetError());
+		return nullptr;
 	}
-
-	Texture* my_texture = new Texture(texture, surface->w, surface->h, tile_size);
 
 	SDL_FreeSurface(surface);
 
-	textures.emplace(asset_id, my_texture);
+	return texture;
 }
 
 Texture* AssetsManager::GetTexture(const std::string& asset_id) const

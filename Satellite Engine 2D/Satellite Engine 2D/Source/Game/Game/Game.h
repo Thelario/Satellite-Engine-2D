@@ -16,12 +16,11 @@ class Game
 
 		SDL_Window* window;
 		SDL_Renderer* renderer;
+		
 		AssetsManager* assets_manager;
 		SceneManager* scene_manager;
 		FacesManager* faces_manager;
 		DicesManager* dices_manager;
-
-		std::vector<GameObject*> game_objects;
 
 		void Initialize();
 		void Setup();

@@ -13,10 +13,7 @@ GameObject::GameObject(glm::vec2 position, glm::vec2 scale, double rotation, std
 	this->z_index = z_index;
 	this->color = color;
 	this->flip_x = flip_x;
-
-	if (assets_manager != nullptr) {
-		texture = assets_manager->GetTexture(asset_id);
-	}
+	this->assets_manager = assets_manager;
 }
 
 void GameObject::Start() { }
@@ -25,9 +22,11 @@ void GameObject::Update() { }
 
 void GameObject::Render(SDL_Renderer* renderer)
 {
-	if (texture == nullptr) {
+	if (assets_manager == nullptr) {
 		return;
 	}
+
+	Texture* texture = assets_manager->GetTexture(asset_id);
 
 	SDL_Rect src = texture->GetSourceRect();
 

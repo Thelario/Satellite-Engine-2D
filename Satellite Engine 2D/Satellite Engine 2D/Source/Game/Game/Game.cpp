@@ -59,9 +59,9 @@ void Game::Initialize()
     is_running = true;
 
     assets_manager = new AssetsManager(renderer);
-    scene_manager = new SceneManager(renderer);
     faces_manager = new FacesManager();
-    dices_manager = new DicesManager(faces_manager);
+    dices_manager = new DicesManager(faces_manager, assets_manager);
+    scene_manager = new SceneManager(renderer);
 }
 
 void Game::Run()
@@ -82,22 +82,11 @@ void Game::Run()
 
 void Game::Setup()
 {
-    assets_manager->AddTexture("dice-one-image", "./Assets/dice_one.png", 64);
+    std::vector<GameObject*> dices;
 
-    scene_manager->Start();
+    dices.push_back(dices_manager->GetDice("dice-attack-basic"));
 
-    GameObject* diceOne = new Dice("d1", glm::vec2(64, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assets_manager, 25, glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
-
-    GameObject* diceTwo = new Dice("d2", glm::vec2(160, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assets_manager, 25, glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
-
-    GameObject* diceThree = new Dice("d3", glm::vec2(160 + 96, SCREEN_HEIGHT - 64), glm::vec2(1), 0, "dice-one-image", 64, 64, 0,
-        Color(255, 255, 255, 255), false, assets_manager, 25, glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
-
-    game_objects.push_back(diceOne);
-    game_objects.push_back(diceTwo);
-    game_objects.push_back(diceThree);
+    scene_manager->Start(dices);
 }
 
 void Game::ProcessInput()
@@ -182,11 +171,6 @@ void Game::ProcessInput()
 
 void Game::Update()
 {
-    for (GameObject* go : game_objects)
-    {
-        go->Update();
-    }
-
     scene_manager->Update();
 }
 
@@ -195,21 +179,13 @@ void Game::Render()
     SDL_SetRenderDrawColor(renderer, 14, 23, 33, 255);
     SDL_RenderClear(renderer);
 
-    for (GameObject* go : game_objects)
-    {
-        go->Render(renderer);
-    }
+    scene_manager->Render();
 
     SDL_RenderPresent(renderer); // Swaping back and front buffers
 }
 
 void Game::Destroy()
 {
-    for (GameObject* go : game_objects)
-    {
-        delete go;
-    }
-
     delete faces_manager;
     delete dices_manager;
     delete scene_manager;

@@ -1,4 +1,5 @@
 #include "Texture.h"
+
 #include "../Logger/Logger.h"
 
 Texture::Texture(SDL_Texture* texture, int width, int height)
