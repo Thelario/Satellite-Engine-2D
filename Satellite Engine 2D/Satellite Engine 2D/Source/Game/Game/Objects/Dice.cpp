@@ -1,5 +1,8 @@
 #include "Dice.h"
+
 #include <SDL.h>
+
+#include "../../../Engine/InputManager/InputManager.h"
 
 Dice::Dice(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id,
 	int width, int height, int z_index, Color color, bool flip_x,

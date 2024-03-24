@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../../Engine.h"
+#include <vector>
+
+#include "../../../Engine/GameObject/GameObject.h"
 #include "Face.h"
 
 class Dice : public GameObject

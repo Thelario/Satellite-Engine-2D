@@ -1,6 +1,7 @@
 #include "Face.h"
 
 #include "BattleRoom.h"
+#include "../../../Engine/Logger/Logger.h"
 
 Face::Face(std::string asset_id, unsigned int image_id, FaceType face_type, int value)
 {
@@ -23,4 +24,11 @@ void Face::UseFace()
 		default:
 			break;
 	}
+}
+
+void Face::PrintFace()
+{
+	std::string type = face_type == FaceType::ATTACK ? "Attack" : "Defense";
+
+	Logger::Log("Face with " + asset_id + ", " + std::to_string(image_id) + ", " + std::to_string(value) + ", " + type);
 }

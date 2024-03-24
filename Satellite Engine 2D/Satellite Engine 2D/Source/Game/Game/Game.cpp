@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "Objects/Dice.h"
+#include "../../Engine/Logger/Logger.h"
+#include "../../Engine/InputManager/InputManager.h"
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
@@ -58,6 +60,8 @@ void Game::Initialize()
 
     assets_manager = new AssetsManager(renderer);
     scene_manager = new SceneManager(renderer);
+    faces_manager = new FacesManager();
+    dices_manager = new DicesManager();
 }
 
 void Game::Run()
@@ -206,6 +210,8 @@ void Game::Destroy()
         delete go;
     }
 
+    delete faces_manager;
+    delete dices_manager;
     delete scene_manager;
     delete assets_manager;
 

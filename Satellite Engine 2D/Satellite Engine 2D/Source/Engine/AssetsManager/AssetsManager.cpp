@@ -1,11 +1,8 @@
 #include "AssetsManager.h"
-#include <SDL_image.h>
-#include <iostream>
-#include <fstream>
-#include "../Logger/Logger.h"
-#include "json.hpp"
 
-using json = nlohmann::json;
+#include <SDL_image.h>
+
+#include "../Logger/Logger.h"
 
 AssetsManager::AssetsManager(SDL_Renderer* renderer)
 {
@@ -30,86 +27,19 @@ AssetsManager::~AssetsManager()
 
 bool AssetsManager::LoadAssets()
 {
-	const std::string& file_name = "../../../Config/game_config.json";
-
-	std::ifstream file(file_name);
-
-	if (file.is_open() == false)
-	{
-		Logger::Error("Failed to open file: " + file_name);
-		return false;
-	}
-	
-	json json_data;
-	file >> json_data;
-	/*
-	for (const auto& face : json_data["faces"])
-	{
-		Face* new_face = new Face(face["asset_id"], face["image_id"], face["face_type"], face["value"]);
-
-		faces.emplace(face["name"], new_face);
-
-		Logger::Log("         ");
-		Logger::Log("New face: " + face["name"]);
-		Logger::Log("         ");
-	}*/
-
-	/*
-
-	for (const auto& diceJson : jsonData["dices"])
-	{
-		Dice dice;
-		dice.name = diceJson["name"];
-		for (const auto& faceName : diceJson["faces"]) {
-			for (const auto& face : jsonData["faces"]) {
-				if (face["name"] == faceName) {
-					Face newFace;
-					newFace.name = face["name"];
-					newFace.face_type = face["face_type"];
-					newFace.asset_id = face["asset_id"];
-					newFace.image_id = face["image_id"];
-					newFace.value = face["value"];
-					dice.faces.push_back(newFace);
-					break;
-				}
-			}
-		}
-		dices.push_back(dice);
-	}
-
-	*/
+	// TODO: create a config file to load all the assets in the game
 
 	return true;
 }
 
 void AssetsManager::ClearAssets()
 {
-	// Clearing textures
-
 	for (auto texture : textures)
 	{
 		delete texture.second;
 	}
 
 	textures.clear();
-
-	// Clearing faces
-
-	/*for (auto face : faces)
-	{
-		delete face.second;
-	}
-
-	faces.clear();
-
-	// Clearing dices
-
-	for (auto dice : dices)
-	{
-		delete dice.second;
-	}
-
-	dices.clear();*/
 }
 
 void AssetsManager::AddTexture(const std::string& asset_id, const std::string& file_path, int tile_size)
@@ -151,35 +81,3 @@ Texture* AssetsManager::GetTexture(const std::string& asset_id) const
 
 	return textures.at(asset_id);
 }
-/*
-void AssetsManager::AddFace(const std::string& face_name, Face* face)
-{
-	faces.emplace(face_name, face);
-}
-
-Face* AssetsManager::GetFace(const std::string& face_name) const
-{
-	if (faces.find(face_name) == faces.end())
-	{
-		Logger::Error("Trying to get a face with a wrong name: " + face_name);
-		return nullptr;
-	}
-
-	return faces.at(face_name);
-}
-
-void AssetsManager::AddDice(const std::string& dice_name, Dice* dice)
-{
-	dices.emplace(dice_name, dice);
-}
-
-Dice* AssetsManager::GetDice(const std::string& dice_name) const
-{
-	if (dices.find(dice_name) == dices.end())
-	{
-		Logger::Error("Trying to get a dice with a wrong name: " + dice_name);
-		return nullptr;
-	}
-
-	return dices.at(dice_name);
-}*/

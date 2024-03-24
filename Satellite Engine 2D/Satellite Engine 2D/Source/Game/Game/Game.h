@@ -2,7 +2,11 @@
 
 #include <SDL.h>
 #include <vector>
-#include "../Engine.h"
+
+#include "../../Engine/AssetsManager/AssetsManager.h"
+#include "../../Engine/Scenes/SceneManager.h"
+#include "FacesManager/FacesManager.h"
+#include "DicesManager/DicesManager.h"
 
 class Game
 {
@@ -14,6 +18,9 @@ class Game
 		SDL_Renderer* renderer;
 		AssetsManager* assets_manager;
 		SceneManager* scene_manager;
+		FacesManager* faces_manager;
+		DicesManager* dices_manager;
+
 		std::vector<GameObject*> game_objects;
 
 		void Initialize();
