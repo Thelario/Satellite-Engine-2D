@@ -2,16 +2,15 @@
 
 #include <vector>
 
-#include "../../../Engine/GameObject/GameObject.h"
-#include "../../../Engine/Utils/Random.h"
+#include "../../../../Engine/GameObject/GameObject.h"
+#include "../../../../Engine/Utils/Random.h"
 
 #include "Face.h"
+#include "DiceInfo.h"
 
 class Dice : public GameObject
 {
 	protected:
-		std::string name;
-
 		bool using_dice;
 		bool rotating_dice;
 
@@ -27,7 +26,7 @@ class Dice : public GameObject
 		glm::vec2 screen_center;
 		glm::vec2 direction;
 		
-		std::vector<Face*> faces;
+		DiceInfo* dice_info;
 
 		Random* random;
 

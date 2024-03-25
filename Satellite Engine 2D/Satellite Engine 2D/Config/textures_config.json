@@ -13,6 +13,20 @@
       "width": 448,
       "height": 192,
       "tile_size": 64
+    },
+    {
+      "asset_id": "guys",
+      "name": "guys.png",
+      "width": 256,
+      "height": 128,
+      "tile_size": 128
+    },
+    {
+      "asset_id": "battle-room-background",
+      "name": "background.png",
+      "width": 1080,
+      "height": 720,
+      "tile_size": 0
     }
   ]
 }

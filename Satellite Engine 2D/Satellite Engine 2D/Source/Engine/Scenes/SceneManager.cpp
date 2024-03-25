@@ -20,14 +20,13 @@ SceneManager::~SceneManager()
 	scenes.clear();
 }
 
-void SceneManager::Start(std::vector<GameObject*> game_objects)
+void SceneManager::Start(std::vector<std::vector<GameObject*>> scenes_game_objects)
 {
-	// TODO: leer de un archivo de configuración las escenas que hay y los objetos
-	// que tiene cada escena, y crearlas en base a ese archivo de configuración.
-
-	Scene* scene = new Scene(0, renderer, game_objects);
-
-	scenes.push_back(scene);
+	for (int i = 0; i < scenes_game_objects.size(); i++)
+	{
+		Scene* scene = new Scene(0, renderer, scenes_game_objects[i]);
+		scenes.push_back(scene);
+	}
 
 	scenes[current_scene]->Start();
 }

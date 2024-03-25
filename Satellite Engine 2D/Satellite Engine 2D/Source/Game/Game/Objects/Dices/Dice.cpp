@@ -2,15 +2,14 @@
 
 #include <SDL.h>
 
-#include "../../../Engine/InputManager/InputManager.h"
-#include "../../../Engine/Logger/Logger.h"
+#include "../../../../Engine/InputManager/InputManager.h"
+#include "../../../../Engine/Logger/Logger.h"
 
 Dice::Dice(std::string name, glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id,
 	int width, int height, int z_index, Color color, bool flip_x,
 	AssetsManager* assets_manager, Uint32 time_rate, glm::vec2 screen_center, Uint32 time_rate_limit, Random* random)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
-	this->name = name;
 	this->rotating_dice = false;
 	this->using_dice = false;
 	this->face = 0;
@@ -24,21 +23,6 @@ Dice::Dice(std::string name, glm::vec2 position, glm::vec2 scale, double rotatio
 	this->direction = screen_center - position;
 	this->direction = glm::normalize(direction);
 	this->random = random;
-}
-
-void Dice::AddFace(Face* face)
-{
-	faces.push_back(face);
-}
-
-void Dice::PrintFaces()
-{
-	Logger::Log("Dice: " + name);
-
-	for (Face* face : faces)
-	{
-		face->PrintFace();
-	}
 }
 
 void Dice::Start() { }
@@ -66,9 +50,9 @@ void Dice::Render(SDL_Renderer* renderer)
 		return;
 	}
 
-	Texture* texture = assets_manager->GetTexture(faces[face]->asset_id);
+	Texture* texture = assets_manager->GetTexture(dice_info->GetFace(face)->asset_id);
 
-	SDL_Rect src = texture->GetTileSourceRect(faces[face]->image_id);
+	SDL_Rect src = texture->GetTileSourceRect(dice_info->GetFace(face)->image_id);
 
 	float width_x = width * scale.x;
 	float height_y = height * scale.y;
@@ -94,10 +78,12 @@ void Dice::ResetDice()
 
 void Dice::UseDice()
 {
+	/*
 	if (selected_face == -1) // Calculate random face only first time
 	{
 		selected_face = random->GenerateRandomInteger(0, faces.size() - 1);
 	}
+	*/
 
 	float distance = glm::distance(screen_center, position);
 

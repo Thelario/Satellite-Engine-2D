@@ -4,12 +4,14 @@
 #include <string>
 
 #include "../FacesManager/FacesManager.h"
-#include "../Objects/Dice.h"
+#include "../Objects/Dices/DiceInfo.h"
+#include "../../../Engine/AssetsManager/AssetsManager.h"
+#include "../../../Engine/Utils/Random.h"
 
 class DicesManager
 {
 	private:
-		std::map<std::string, Dice*> dices;
+		std::map<std::string, DiceInfo*> dices;
 
 		FacesManager* faces_manager;
 		AssetsManager* assets_manager;
@@ -22,5 +24,5 @@ class DicesManager
 		bool LoadDices();
 		void ClearDices();
 
-		Dice* GetDice(const std::string& dice_name) const;
+		DiceInfo* GetDice(const std::string& dice_name) const;
 };

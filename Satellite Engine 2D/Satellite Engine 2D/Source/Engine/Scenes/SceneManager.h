@@ -15,7 +15,7 @@ class SceneManager
 		SceneManager(SDL_Renderer* renderer);
 		~SceneManager();
 
-		void Start(std::vector<GameObject*> game_objects);
+		void Start(std::vector<std::vector<GameObject*>> scenes_game_objects);
 		void Update();
 		void Render();
 

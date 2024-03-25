@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-#include "../Objects/Face.h"
+#include "../Objects/Dices/Face.h"
 
 class FacesManager
 {

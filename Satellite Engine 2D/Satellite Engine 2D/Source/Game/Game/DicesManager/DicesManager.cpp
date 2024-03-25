@@ -55,8 +55,7 @@ bool DicesManager::LoadDices()
 	{
 		std::string dice_name = dice_json["name"];
 
-		Dice* dice = new Dice(dice_name, glm::vec2(1000, 90), glm::vec2(1), 0, "", 64, 64, 0, Color(255, 255, 255, 255),
-			false, assets_manager, 10, glm::vec2(540, 360), 300, random);
+		DiceInfo* dice = new DiceInfo(dice_name);
 
 		for (const auto& face_name : dice_json["faces"])
 		{
@@ -86,7 +85,7 @@ void DicesManager::ClearDices()
 	dices.clear();
 }
 
-Dice* DicesManager::GetDice(const std::string& dice_name) const
+DiceInfo* DicesManager::GetDice(const std::string& dice_name) const
 {
 	if (dices.find(dice_name) == dices.end())
 	{

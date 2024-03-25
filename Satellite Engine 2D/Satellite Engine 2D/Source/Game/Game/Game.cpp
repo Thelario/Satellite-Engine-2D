@@ -1,7 +1,12 @@
 #include "Game.h"
-#include "Objects/Dice.h"
+
+#include <ctime>
+#include <chrono>
+
 #include "../../Engine/Logger/Logger.h"
 #include "../../Engine/InputManager/InputManager.h"
+
+#include "Objects/BattleRoom.h"
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
@@ -58,14 +63,26 @@ void Game::Initialize()
 
     is_running = true;
 
-    // TODO: I am probably gonna need two different random variables: one for dices and one for the rest
+    // I need two different random variables: one for dices and one for the rest.
     // The random variable for dices needs to be created according to current system time or smth simlilar,
     // while the other random variable should be created with a random seed that I can store for generating
     // seeded maps, like balatro, slay the spyre and tboi. The dices throws should not be repeatable, so 
     // we need the system time or the sdl ticks (probably not the best, but might be "good enough").
 
-    unrepeatable_random = new Random(1000); // TODO: create on system time
-    repeatable_random = new Random(1000); // TODO: generate and save the seed
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+    std::tm local_tm;
+    localtime_s(&local_tm, &now_time); // TODO: probably take care of system specifics in the future :)
+
+    int seed = (local_tm.tm_hour * 60 * 60) + (local_tm.tm_min * 60) + local_tm.tm_sec;
+    unrepeatable_random = new Random(seed);
+
+    // In the future, the repeatable_random will only be created when a player decides to play a new game.
+    // In case he enters a seed, this seed will not be generated randomly, but if he doesn't introduce a seed,
+    // the game will generate a random seed based on the unrepeatable random engine.
+
+    seed = unrepeatable_random->GenerateRandomInteger(1, 1000000);
+    repeatable_random = new Random(seed);
 
     assets_manager = new AssetsManager(renderer);
     faces_manager = new FacesManager();
@@ -91,11 +108,15 @@ void Game::Run()
 
 void Game::Setup()
 {
-    std::vector<GameObject*> dices;
+    std::vector<GameObject*> scene_one;
+    BattleRoom* battle_room = new BattleRoom(glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), glm::vec2(1), 0.0, "battle-room-background",
+        SCREEN_WIDTH, SCREEN_HEIGHT, 0, Color(255, 255, 255, 255), false, assets_manager, SCREEN_WIDTH, SCREEN_HEIGHT);
+    scene_one.push_back(battle_room);
 
-    dices.push_back(dices_manager->GetDice("dice-attack-basic"));
+    std::vector<std::vector<GameObject*>> scenes_game_objects;
+    scenes_game_objects.push_back(scene_one);
 
-    scene_manager->Start(dices);
+    scene_manager->Start(scenes_game_objects);
 }
 
 void Game::ProcessInput()

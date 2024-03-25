@@ -1,7 +1,7 @@
 {
   "dices": [
     {
-      "name": "dice-attack-basic",
+      "name": "dice-basic-attack",
       "faces": [
         "face-attack-one",
         "face-attack-two",
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "name": "dice-defense-basic",
+      "name": "dice-basic-defense",
       "faces": [
         "face-defense-one",
         "face-defense-two",
@@ -20,6 +20,17 @@
         "face-defense-four",
         "face-defense-five",
         "face-defense-six"
+      ]
+    },
+    {
+      "name": "dice-basic-attack-defense",
+      "faces": [
+        "face-attack-two",
+        "face-attack-three",
+        "face-attack-four",
+        "face-defense-two",
+        "face-defense-three",
+        "face-defense-four"
       ]
     }
   ]

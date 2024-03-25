@@ -1,7 +1,7 @@
 #include "Face.h"
 
-#include "BattleRoom.h"
-#include "../../../Engine/Logger/Logger.h"
+#include "../BattleRoom.h"
+#include "../../../../Engine/Logger/Logger.h"
 
 Face::Face(std::string asset_id, unsigned int image_id, FaceType face_type, int value)
 {
@@ -16,10 +16,10 @@ void Face::UseFace()
 	switch (face_type)
 	{
 		case FaceType::ATTACK:
-			BattleRoom::AttackEnemy(value);
+			//BattleRoom::AttackEnemy(value);
 			break;
 		case FaceType::DEFENSE:
-			BattleRoom::ShieldPlayer(value);
+			//BattleRoom::ShieldPlayer(value);
 			break;
 		default:
 			break;
