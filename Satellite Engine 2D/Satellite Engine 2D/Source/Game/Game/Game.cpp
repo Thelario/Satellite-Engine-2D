@@ -58,9 +58,18 @@ void Game::Initialize()
 
     is_running = true;
 
+    // TODO: I am probably gonna need two different random variables: one for dices and one for the rest
+    // The random variable for dices needs to be created according to current system time or smth simlilar,
+    // while the other random variable should be created with a random seed that I can store for generating
+    // seeded maps, like balatro, slay the spyre and tboi. The dices throws should not be repeatable, so 
+    // we need the system time or the sdl ticks (probably not the best, but might be "good enough").
+
+    unrepeatable_random = new Random(1000); // TODO: create on system time
+    repeatable_random = new Random(1000); // TODO: generate and save the seed
+
     assets_manager = new AssetsManager(renderer);
     faces_manager = new FacesManager();
-    dices_manager = new DicesManager(faces_manager, assets_manager);
+    dices_manager = new DicesManager(faces_manager, assets_manager, unrepeatable_random);
     scene_manager = new SceneManager(renderer);
 }
 
@@ -186,6 +195,8 @@ void Game::Render()
 
 void Game::Destroy()
 {
+    delete unrepeatable_random;
+    delete repeatable_random;
     delete faces_manager;
     delete dices_manager;
     delete scene_manager;

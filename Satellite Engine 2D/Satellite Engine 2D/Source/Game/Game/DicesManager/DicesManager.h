@@ -13,9 +13,10 @@ class DicesManager
 
 		FacesManager* faces_manager;
 		AssetsManager* assets_manager;
+		Random* random;
 
 	public:
-		DicesManager(FacesManager* faces_manager, AssetsManager* assets_manager);
+		DicesManager(FacesManager* faces_manager, AssetsManager* assets_manager, Random* random);
 		~DicesManager();
 
 		bool LoadDices();

@@ -5,6 +5,8 @@
 
 #include "../../Engine/AssetsManager/AssetsManager.h"
 #include "../../Engine/Scenes/SceneManager.h"
+#include "../../Engine/Utils/Random.h"
+
 #include "FacesManager/FacesManager.h"
 #include "DicesManager/DicesManager.h"
 
@@ -21,6 +23,9 @@ class Game
 		SceneManager* scene_manager;
 		FacesManager* faces_manager;
 		DicesManager* dices_manager;
+		
+		Random* unrepeatable_random;
+		Random* repeatable_random;
 
 		void Initialize();
 		void Setup();
