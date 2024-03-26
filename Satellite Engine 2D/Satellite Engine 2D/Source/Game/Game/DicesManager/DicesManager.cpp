@@ -8,6 +8,8 @@
 
 using json = nlohmann::json;
 
+std::map<std::string, DiceInfo*> DicesManager::dices = { };
+
 DicesManager::DicesManager(FacesManager* faces_manager, AssetsManager* assets_manager, Random* random)
 {
 	this->faces_manager = faces_manager;
@@ -85,7 +87,7 @@ void DicesManager::ClearDices()
 	dices.clear();
 }
 
-DiceInfo* DicesManager::GetDice(const std::string& dice_name) const
+DiceInfo* DicesManager::GetDice(const std::string& dice_name)
 {
 	if (dices.find(dice_name) == dices.end())
 	{

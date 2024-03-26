@@ -100,6 +100,20 @@ void Game::Run()
 
     while (is_running)
     {
+        /*
+        * The next code can be used to cap the FPS to a certain amount. If left commented,
+        * the game will run with the highest FPS possible that the machine can achieve.
+        *
+        int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecondsPreviousFrame);
+        if (timeToWait > 0 && timeToWait <= MILLISECS_PER_FRAME) {
+            SDL_Delay(timeToWait);
+        }
+        */
+
+        delta_time = (SDL_GetTicks() - milliseconds_previous_frame) / 1000.0;
+
+        milliseconds_previous_frame = SDL_GetTicks();
+
         ProcessInput();
         Update();
         Render();
@@ -110,7 +124,7 @@ void Game::Setup()
 {
     std::vector<GameObject*> scene_one;
     BattleRoom* battle_room = new BattleRoom(glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), glm::vec2(1), 0.0, "battle-room-background",
-        SCREEN_WIDTH, SCREEN_HEIGHT, 0, Color(255, 255, 255, 255), false, assets_manager, SCREEN_WIDTH, SCREEN_HEIGHT);
+        SCREEN_WIDTH, SCREEN_HEIGHT, 0, Color(255, 255, 255, 255), false, assets_manager, SCREEN_WIDTH, SCREEN_HEIGHT, unrepeatable_random);
     scene_one.push_back(battle_room);
 
     std::vector<std::vector<GameObject*>> scenes_game_objects;
@@ -201,7 +215,7 @@ void Game::ProcessInput()
 
 void Game::Update()
 {
-    scene_manager->Update();
+    scene_manager->Update(delta_time);
 }
 
 void Game::Render()

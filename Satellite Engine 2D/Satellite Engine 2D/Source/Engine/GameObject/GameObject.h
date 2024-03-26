@@ -31,7 +31,7 @@ class GameObject
 		virtual ~GameObject() = default;
 
 		virtual void Start();
-		virtual void Update();
+		virtual void Update(double delta_time);
 		virtual void Render(SDL_Renderer* renderer);
 
 		virtual void SetPosition(glm::vec2 position);

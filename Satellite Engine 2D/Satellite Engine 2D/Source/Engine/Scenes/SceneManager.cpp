@@ -31,9 +31,9 @@ void SceneManager::Start(std::vector<std::vector<GameObject*>> scenes_game_objec
 	scenes[current_scene]->Start();
 }
 
-void SceneManager::Update()
+void SceneManager::Update(double delta_time)
 {
-	scenes[current_scene]->Update();
+	scenes[current_scene]->Update(delta_time);
 }
 
 void SceneManager::Render()

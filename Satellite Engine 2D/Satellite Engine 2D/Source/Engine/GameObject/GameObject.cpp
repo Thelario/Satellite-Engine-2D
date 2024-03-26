@@ -18,7 +18,7 @@ GameObject::GameObject(glm::vec2 position, glm::vec2 scale, double rotation, std
 
 void GameObject::Start() { }
 
-void GameObject::Update() { }
+void GameObject::Update(double delta_time) { }
 
 void GameObject::Render(SDL_Renderer* renderer)
 {

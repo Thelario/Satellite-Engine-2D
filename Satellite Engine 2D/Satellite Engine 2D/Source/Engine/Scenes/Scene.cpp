@@ -24,11 +24,11 @@ void Scene::Start()
 	}
 }
 
-void Scene::Update()
+void Scene::Update(double delta_time)
 {
 	for (auto i = 0; i < game_objects.size(); i++)
 	{
-		game_objects[i]->Update();
+		game_objects[i]->Update(delta_time);
 	}
 }
 

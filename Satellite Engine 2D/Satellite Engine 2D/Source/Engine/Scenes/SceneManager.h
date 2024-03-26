@@ -16,7 +16,7 @@ class SceneManager
 		~SceneManager();
 
 		void Start(std::vector<std::vector<GameObject*>> scenes_game_objects);
-		void Update();
+		void Update(double delta_time);
 		void Render();
 
 		void ChangeScene(int newScene);

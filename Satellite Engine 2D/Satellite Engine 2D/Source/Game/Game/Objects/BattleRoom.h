@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Player.h"
+#include "Enemy.h"
 
 enum Turn { PLAYER, ENEMY };
 
@@ -19,17 +20,21 @@ class BattleRoom : public GameObject
 		static Turn turn;
 
 		Player* player;
-		GameObject* enemy;
+		Enemy* enemy;
+
+		Random* random;
+
+		std::vector<Dice*> player_dices;
 
 	public:
 		BattleRoom(glm::vec2 position = glm::vec2(0), glm::vec2 scale = glm::vec2(0),
 			double rotation = 0, std::string asset_id = "", int width = 0, int height = 0, int z_index = 0,
 			Color color = Color(255, 255, 255, 255), bool flip_x = false, AssetsManager* assets_manager = nullptr,
-			int screen_width = 0, int screen_height = 0);
+			int screen_width = 0, int screen_height = 0, Random* random = nullptr);
 		~BattleRoom();
 
 		void Start() override;
-		void Update() override;
+		void Update(double delta_time) override;
 		void Render(SDL_Renderer* renderer) override;
 
 		void ClearRoom();

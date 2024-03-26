@@ -26,6 +26,8 @@ Face* DiceInfo::GetFace(int face)
 
 std::vector<Face*> DiceInfo::GetFaces() { return faces; }
 
+int DiceInfo::GetFacesSize() { return faces.size(); }
+
 void DiceInfo::PrintFaces()
 {
 	Logger::Log("Dice: " + dice_name);

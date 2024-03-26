@@ -6,15 +6,15 @@
 #include "../../../../Engine/Logger/Logger.h"
 
 Dice::Dice(std::string name, glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id,
-	int width, int height, int z_index, Color color, bool flip_x,
-	AssetsManager* assets_manager, Uint32 time_rate, glm::vec2 screen_center, Uint32 time_rate_limit, Random* random)
+	int width, int height, int z_index, Color color, bool flip_x, AssetsManager* assets_manager, Uint32 time_rate,
+	glm::vec2 screen_center, Uint32 time_rate_limit, Random* random, DiceInfo* dice_info)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
 	this->rotating_dice = false;
 	this->using_dice = false;
 	this->face = 0;
 	this->selected_face = -1;
-	this->move_speed = 25;
+	this->move_speed = 1000;
 	this->time_rate_increase = 15;
 	this->time_rate = time_rate;
 	this->time_rate_limit = time_rate_limit;
@@ -23,11 +23,12 @@ Dice::Dice(std::string name, glm::vec2 position, glm::vec2 scale, double rotatio
 	this->direction = screen_center - position;
 	this->direction = glm::normalize(direction);
 	this->random = random;
+	this->dice_info = dice_info;
 }
 
 void Dice::Start() { }
 
-void Dice::Update()
+void Dice::Update(double delta_time)
 {
 	if (InputManager::GetMouseButtonDown(1))
 	{
@@ -40,7 +41,7 @@ void Dice::Update()
 	}
 	else
 	{
-		UseDice();
+		UseDice(delta_time);
 	}
 }
 
@@ -50,9 +51,11 @@ void Dice::Render(SDL_Renderer* renderer)
 		return;
 	}
 
-	Texture* texture = assets_manager->GetTexture(dice_info->GetFace(face)->asset_id);
+	Face* dice_face = dice_info->GetFace(face);
 
-	SDL_Rect src = texture->GetTileSourceRect(dice_info->GetFace(face)->image_id);
+	Texture* texture = assets_manager->GetTexture(dice_face->asset_id);
+
+	SDL_Rect src = texture->GetTileSourceRect(dice_face->image_id);
 
 	float width_x = width * scale.x;
 	float height_y = height * scale.y;
@@ -76,20 +79,19 @@ void Dice::ResetDice()
 
 }
 
-void Dice::UseDice()
+void Dice::UseDice(double delta_time)
 {
-	/*
 	if (selected_face == -1) // Calculate random face only first time
 	{
-		selected_face = random->GenerateRandomInteger(0, faces.size() - 1);
+		selected_face = random->GenerateRandomInteger(0, dice_info->GetFacesSize() - 1);
 	}
-	*/
 
 	float distance = glm::distance(screen_center, position);
 
 	if (glm::abs(distance) > 20) // Move the dice if not in center
 	{
-		position += move_speed * direction;
+		position.x += delta_time * move_speed * direction.x;
+		position.y += delta_time * move_speed * direction.y;
 	}
 	else
 	{
@@ -97,14 +99,12 @@ void Dice::UseDice()
 
 		if (time_rate >= time_rate_limit)
 		{
-			Logger::Log("Time rate limit reached. Selected face: " + std::to_string(selected_face) + ", current face: " + std::to_string(face));
-
 			if (face == selected_face) {
 				return;
 			}
 		}
 
-		// If time rate imit not reached, keep animating dice throw
+		// If time rate limit not reached, keep animating dice throw
 
 		Uint32 current_time = SDL_GetTicks();
 

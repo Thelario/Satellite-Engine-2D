@@ -18,5 +18,6 @@ class DiceInfo
 		void AddFace(Face* face);
 		Face* GetFace(int face);
 		std::vector<Face*> GetFaces();
+		int GetFacesSize();
 		void PrintFaces();
 };

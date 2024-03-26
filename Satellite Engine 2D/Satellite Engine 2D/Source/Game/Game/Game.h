@@ -13,6 +13,9 @@
 class Game
 {
 	private:
+		Uint32 milliseconds_previous_frame;
+		double delta_time;
+
 		bool is_running;
 		bool debug;
 

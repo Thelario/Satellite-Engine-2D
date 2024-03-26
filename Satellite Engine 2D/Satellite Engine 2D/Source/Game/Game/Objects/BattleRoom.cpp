@@ -5,11 +5,12 @@
 Turn BattleRoom::turn = Turn::PLAYER;
 
 BattleRoom::BattleRoom(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id, int width, int height,
-	int z_index, Color color, bool flip_x, AssetsManager* assets_manager, int screen_width, int screen_height)
+	int z_index, Color color, bool flip_x, AssetsManager* assets_manager, int screen_width, int screen_height, Random* random)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
 	this->screen_width = screen_width;
 	this->screen_height = screen_height;
+	this->random = random;
 
 	ConfigureRoom();
 }
@@ -25,10 +26,15 @@ void BattleRoom::Start()
 
 }
 
-void BattleRoom::Update()
+void BattleRoom::Update(double delta_time)
 {
-	player->Update();
-	enemy->Update();
+	player->Update(delta_time);
+	enemy->Update(delta_time);
+
+	for (Dice* dice : player_dices)
+	{
+		dice->Update(delta_time);
+	}
 }
 
 void BattleRoom::Render(SDL_Renderer* renderer)
@@ -38,7 +44,10 @@ void BattleRoom::Render(SDL_Renderer* renderer)
 	player->Render(renderer);
 	enemy->Render(renderer);
 
-	// Render hand of dices
+	for (Dice* dice : player_dices)
+	{
+		dice->Render(renderer);
+	}
 }
 
 void BattleRoom::ClearRoom()
@@ -48,16 +57,29 @@ void BattleRoom::ClearRoom()
 
 void BattleRoom::ConfigureRoom()
 {
-	dice_hand_initial_position = glm::vec2(32, screen_height - 32);
-	dice_hand_separation_between_dices = 32;
+	dice_hand_initial_position = glm::vec2(96, screen_height - 96);
+	dice_hand_separation_between_dices = 96;
 
-	player_position = glm::vec2(screen_width / 4, screen_height / 2);
-	enemy_position = glm::vec2(screen_width - (screen_width / 4), screen_height / 2);
+	player_position = glm::vec2(screen_width / 5, screen_height / 2.5);
+	enemy_position = glm::vec2(screen_width - (screen_width / 5), screen_height / 2.5);
 
 	turn = Turn::PLAYER;
 
-	player = new Player();
-	enemy = new GameObject();
+	player = new Player(player_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255), false, assets_manager, random);
+	enemy = new Enemy(enemy_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255), false, assets_manager);
+
+	std::vector<PlayerDice*> player_draw_dices = player->DrawDices();
+
+	for (int i = 0; i < player_draw_dices.size(); i++)
+	{
+		DiceInfo* player_dice_info = player_draw_dices[i]->GetDiceInfo();
+
+		Dice* dice = new Dice(player_dice_info->GetDiceName(), dice_hand_initial_position + glm::vec2(dice_hand_separation_between_dices * i, 0),
+			glm::vec2(1), 0.0, player_dice_info->GetDiceName(), 64, 64, 0, Color(255, 255, 255, 255), false, assets_manager, 25,
+			glm::vec2(screen_width / 2, screen_height / 2), 300, random, player_dice_info);
+
+		player_dices.push_back(dice);
+	}
 }
 
 void BattleRoom::RenderBackground(SDL_Renderer* renderer)

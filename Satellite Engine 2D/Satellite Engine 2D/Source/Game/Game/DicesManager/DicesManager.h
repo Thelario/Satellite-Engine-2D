@@ -11,7 +11,7 @@
 class DicesManager
 {
 	private:
-		std::map<std::string, DiceInfo*> dices;
+		static std::map<std::string, DiceInfo*> dices;
 
 		FacesManager* faces_manager;
 		AssetsManager* assets_manager;
@@ -24,5 +24,5 @@ class DicesManager
 		bool LoadDices();
 		void ClearDices();
 
-		DiceInfo* GetDice(const std::string& dice_name) const;
+		static DiceInfo* GetDice(const std::string& dice_name);
 };

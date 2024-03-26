@@ -16,7 +16,7 @@ class Scene
 		~Scene();
 
 		void Start();
-		void Update();
+		void Update(double delta_time);
 		void Render();
 		void Clear();
 };
