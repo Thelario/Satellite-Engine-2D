@@ -32,6 +32,8 @@ AssetsManager::~AssetsManager()
 
 bool AssetsManager::LoadAssets()
 {
+	// Loading textures
+
 	const std::string& config_file_name = "./Config/textures_config.json";
 
 	std::ifstream file;
@@ -46,7 +48,7 @@ bool AssetsManager::LoadAssets()
 
 	json json_data = json::parse(file);
 
-	std::string file_path = "./Assets/";
+	std::string file_path = "./Assets/Images/";
 
 	for (const auto& texture_json : json_data["textures"])
 	{
@@ -61,6 +63,11 @@ bool AssetsManager::LoadAssets()
 
 	file.close();
 
+	// Loading fonts
+
+	AddFont("arial-font", "./Assets/Fonts/arial.ttf", 100);
+	AddFont("charriot-font", "./Assets/Fonts/charriot.ttf", 100);
+
 	return true;
 }
 
@@ -72,7 +79,18 @@ void AssetsManager::ClearAssets()
 	}
 
 	textures.clear();
+
+	for (auto font : fonts)
+	{
+		TTF_CloseFont(font.second);
+	}
+
+	fonts.clear();
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Textures
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 SDL_Texture* AssetsManager::GenerateTexture(const std::string& file_path)
 {
@@ -110,4 +128,24 @@ Texture* AssetsManager::GetTexture(const std::string& asset_id) const
 	}
 
 	return textures.at(asset_id);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Fonts
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void AssetsManager::AddFont(const std::string& asset_id, const std::string& file_path, int font_size)
+{
+	fonts.emplace(asset_id, TTF_OpenFont(file_path.c_str(), font_size));
+}
+
+TTF_Font* AssetsManager::GetFont(const std::string& asset_id) const
+{
+	if (fonts.find(asset_id) == fonts.end())
+	{
+		Logger::Error("Trying to get a font with a wrong asset id: " + asset_id);
+		return nullptr;
+	}
+
+	return fonts.at(asset_id);
 }

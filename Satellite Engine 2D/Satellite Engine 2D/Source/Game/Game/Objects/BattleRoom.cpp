@@ -19,6 +19,10 @@ BattleRoom::~BattleRoom()
 {
 	delete player;
 	delete enemy;
+
+	delete player_health_text;
+	delete player_mana_text;
+	delete enemy_health_text;
 }
 
 void BattleRoom::Start()
@@ -48,6 +52,10 @@ void BattleRoom::Render(SDL_Renderer* renderer)
 	{
 		dice->Render(renderer);
 	}
+
+	player_health_text->Render(renderer);
+	player_mana_text->Render(renderer);
+	enemy_health_text->Render(renderer);
 }
 
 void BattleRoom::ClearRoom()
@@ -64,9 +72,20 @@ void BattleRoom::ConfigureRoom()
 	enemy_position = glm::vec2(screen_width - (screen_width / 5), screen_height / 2.5);
 
 	turn = Turn::PLAYER;
+	
+	player_health_text = nullptr;
+	player_mana_text = nullptr;
+	enemy_health_text = nullptr;
 
-	player = new Player(player_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255), false, assets_manager, random);
+	player_health_text = new Text(player_position + glm::vec2(0, 128), glm::vec2(0.25), "100/100", "charriot-font", assets_manager);
+	player_mana_text = new Text(player_position + glm::vec2(0, 160), glm::vec2(0.25), "100/100", "charriot-font", assets_manager);
+	enemy_health_text = new Text(enemy_position + glm::vec2(-24, 128), glm::vec2(0.25), "100/100", "charriot-font", assets_manager);
+
+	player = new Player(player_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255),
+		false, assets_manager, random, player_health_text, player_mana_text);
+
 	enemy = new Enemy(enemy_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255), false, assets_manager);
+
 
 	std::vector<PlayerDice*> player_draw_dices = player->DrawDices();
 

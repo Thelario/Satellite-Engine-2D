@@ -2,12 +2,15 @@
 
 #include "../../../../Engine/Logger/Logger.h"
 
-DiceInfo::DiceInfo(std::string dice_name)
+DiceInfo::DiceInfo(std::string dice_name, int mana_cost)
 {
 	this->dice_name = dice_name;
+	this->mana_cost = mana_cost;
 }
 
 std::string DiceInfo::GetDiceName() { return dice_name; }
+
+int DiceInfo::GetManaCost() { return mana_cost; }
 
 void DiceInfo::AddFace(Face* face)
 {

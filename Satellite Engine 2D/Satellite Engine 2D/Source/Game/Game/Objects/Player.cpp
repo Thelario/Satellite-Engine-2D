@@ -2,19 +2,27 @@
 #include "../../../Engine/Logger/Logger.h"
 
 Player::Player( glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id, int width, int height,
-	int z_index, Color color, bool flip_x, AssetsManager* assets_manager, Random* random)
+	int z_index, Color color, bool flip_x, AssetsManager* assets_manager, Random* random, Text* health_text, Text* mana_text)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
 	this->current_health = 100;
 	this->max_health = 100;
 
-	this->current_mana = 2;
-	this->max_mana = 2;
+	this->current_mana = 4;
+	this->max_mana = 4;
 
 	this->current_hand_size = 0;
 	this->max_hand_size = 4;
 
 	this->random = random;
+	this->health_text = health_text;
+	this->mana_text = mana_text;
+
+	if (health_text != nullptr)
+		this->health_text->SetText("H:" + std::to_string(current_health) + "/" + std::to_string(max_health));
+
+	if (mana_text != nullptr)
+		this->mana_text->SetText("M:" + std::to_string(current_mana) + "/" + std::to_string(max_mana));
 
 	PlayerDice* player_dice_one = new PlayerDice("dice-basic-attack", false);
 	PlayerDice* player_dice_two = new PlayerDice("dice-basic-attack", false);

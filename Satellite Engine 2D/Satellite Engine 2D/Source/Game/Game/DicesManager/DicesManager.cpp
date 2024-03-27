@@ -57,7 +57,7 @@ bool DicesManager::LoadDices()
 	{
 		std::string dice_name = dice_json["name"];
 
-		DiceInfo* dice = new DiceInfo(dice_name);
+		DiceInfo* dice = new DiceInfo(dice_name, dice_json["mana_cost"]);
 
 		for (const auto& face_name : dice_json["faces"])
 		{

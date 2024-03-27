@@ -2,6 +2,7 @@
   "dices": [
     {
       "name": "dice-basic-attack",
+      "mana_cost": 2,
       "faces": [
         "face-attack-one",
         "face-attack-two",
@@ -13,6 +14,7 @@
     },
     {
       "name": "dice-basic-defense",
+      "mana_cost": 2,
       "faces": [
         "face-defense-one",
         "face-defense-two",
@@ -24,6 +26,7 @@
     },
     {
       "name": "dice-basic-attack-defense",
+      "mana_cost": 3,
       "faces": [
         "face-attack-two",
         "face-attack-three",

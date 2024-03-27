@@ -2,6 +2,7 @@
 
 #include <ctime>
 #include <chrono>
+#include <SDL_ttf.h>
 
 #include "../../Engine/Logger/Logger.h"
 #include "../../Engine/InputManager/InputManager.h"
@@ -30,10 +31,15 @@ void Game::Initialize()
 
     // Initializing SDL
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-    {
-        const char* error = SDL_GetError();
-        Logger::Error("Error initializing SDL: ", error);
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+        Logger::Error("Error initializing SDL: ", SDL_GetError());
+        return;
+    }
+
+    // Initializing TTF
+
+    if (TTF_Init() != 0) {
+        Logger::Error("Error initializing TTF: ", TTF_GetError());
         return;
     }
 
@@ -41,8 +47,7 @@ void Game::Initialize()
 
     window = SDL_CreateWindow("Satellite Engine 2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
-    if (window == NULL)
-    {
+    if (window == NULL) {
         const char* error = SDL_GetError();
         Logger::Error("Error creating SDL window: ", error);
         return;
@@ -52,8 +57,7 @@ void Game::Initialize()
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    if (!renderer)
-    {
+    if (!renderer) {
         const char* error = SDL_GetError();
         Logger::Error("Error creating SDL renderer: ", error);
         return;

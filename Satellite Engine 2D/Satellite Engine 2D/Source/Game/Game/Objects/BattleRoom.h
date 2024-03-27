@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "Enemy.h"
 
+#include "../../../Engine/Rendering/Text.h"
+
 enum Turn { PLAYER, ENEMY };
 
 class BattleRoom : public GameObject
@@ -21,6 +23,10 @@ class BattleRoom : public GameObject
 
 		Player* player;
 		Enemy* enemy;
+
+		Text* player_health_text;
+		Text* player_mana_text;
+		Text* enemy_health_text;
 
 		Random* random;
 
