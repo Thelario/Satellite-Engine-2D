@@ -14,6 +14,10 @@ Text::Text(glm::vec2 position, glm::vec2 scale, std::string text, std::string as
 
 void Text::SetText(std::string new_text) { text = new_text; }
 
+void Text::SetPosition(glm::vec2 new_position) { position = new_position; }
+
+void Text::SetScale(glm::vec2 new_scale) { scale = new_scale; }
+
 void Text::Render(SDL_Renderer* renderer)
 {
 	if (font == nullptr) {

@@ -32,12 +32,17 @@ void BattleRoom::Start()
 
 void BattleRoom::Update(double delta_time)
 {
-	player->Update(delta_time);
-	enemy->Update(delta_time);
-
-	for (Dice* dice : player_dices)
+	switch (turn)
 	{
-		dice->Update(delta_time);
+		case Turn::PLAYER:
+			player->Update(delta_time);
+			for (Dice* dice : player_dices) {
+				dice->Update(delta_time);
+			}
+			break;
+		case Turn::ENEMY:
+			enemy->Update(delta_time);
+			break;
 	}
 }
 
@@ -84,8 +89,8 @@ void BattleRoom::ConfigureRoom()
 	player = new Player(player_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255),
 		false, assets_manager, random, player_health_text, player_mana_text);
 
-	enemy = new Enemy(enemy_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255), false, assets_manager);
-
+	enemy = new Enemy(enemy_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255),
+		false, assets_manager, enemy_health_text, random);
 
 	std::vector<PlayerDice*> player_draw_dices = player->DrawDices();
 
@@ -95,7 +100,7 @@ void BattleRoom::ConfigureRoom()
 
 		Dice* dice = new Dice(player_dice_info->GetDiceName(), dice_hand_initial_position + glm::vec2(dice_hand_separation_between_dices * i, 0),
 			glm::vec2(1), 0.0, player_dice_info->GetDiceName(), 64, 64, 0, Color(255, 255, 255, 255), false, assets_manager, 25,
-			glm::vec2(screen_width / 2, screen_height / 2), 300, random, player_dice_info);
+			glm::vec2(screen_width / 2, screen_height / 2), 150, random, player_dice_info);
 
 		player_dices.push_back(dice);
 	}

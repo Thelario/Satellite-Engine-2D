@@ -1,4 +1,5 @@
 #include "Player.h"
+
 #include "../../../Engine/Logger/Logger.h"
 
 Player::Player( glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id, int width, int height,
@@ -27,9 +28,9 @@ Player::Player( glm::vec2 position, glm::vec2 scale, double rotation, std::strin
 	PlayerDice* player_dice_one = new PlayerDice("dice-basic-attack", false);
 	PlayerDice* player_dice_two = new PlayerDice("dice-basic-attack", false);
 	PlayerDice* player_dice_three = new PlayerDice("dice-basic-attack", false);
-	PlayerDice* player_dice_four = new PlayerDice("dice-basic-defense", false);
-	PlayerDice* player_dice_five = new PlayerDice("dice-basic-defense", false);
-	PlayerDice* player_dice_six = new PlayerDice("dice-basic-defense", false);
+	PlayerDice* player_dice_four = new PlayerDice("dice-basic-deffense", false);
+	PlayerDice* player_dice_five = new PlayerDice("dice-basic-deffense", false);
+	PlayerDice* player_dice_six = new PlayerDice("dice-basic-deffense", false);
 
 	this->dice_inventory.push_back(player_dice_one);
 	this->dice_inventory.push_back(player_dice_two);

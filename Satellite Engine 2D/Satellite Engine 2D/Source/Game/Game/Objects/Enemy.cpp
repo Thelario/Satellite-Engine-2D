@@ -1,11 +1,17 @@
 #include "Enemy.h"
 
 Enemy::Enemy(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id, int width, int height,
-	int z_index, Color color, bool flip_x, AssetsManager* assets_manager)
+	int z_index, Color color, bool flip_x, AssetsManager* assets_manager, Text* health_text, Random* random)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
-	current_health = 100;
-	max_health = 100;
+	current_health = 15;
+	max_health = 15;
+
+	this->health_text = health_text;
+	this->random = random;
+
+	if (health_text != nullptr)
+		this->health_text->SetText("H:" + std::to_string(current_health) + "/" + std::to_string(max_health));
 }
 
 void Enemy::Render(SDL_Renderer* renderer)

@@ -83,6 +83,41 @@
       "asset_id": "dices-one",
       "image_id": 20,
       "value": 6
+    },
+    {
+      "name": "simple-face-mana",
+      "face_type": 1,
+      "asset_id": "dices-simple",
+      "image_id": 0,
+      "value": 1
+    },
+    {
+      "name": "simple-face-attack",
+      "face_type": 1,
+      "asset_id": "dices-simple",
+      "image_id": 1,
+      "value": 1
+    },
+    {
+      "name": "simple-face-deffense",
+      "face_type": 1,
+      "asset_id": "dices-simple",
+      "image_id": 2,
+      "value": 1
+    },
+    {
+      "name": "simple-face-miss",
+      "face_type": 1,
+      "asset_id": "dices-simple",
+      "image_id": 4,
+      "value": 1
+    },
+    {
+      "name": "simple-face-health",
+      "face_type": 1,
+      "asset_id": "dices-simple",
+      "image_id": 5,
+      "value": 1
     }
   ]
 }

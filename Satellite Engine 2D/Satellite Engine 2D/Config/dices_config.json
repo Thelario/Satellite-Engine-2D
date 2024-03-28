@@ -4,36 +4,36 @@
       "name": "dice-basic-attack",
       "mana_cost": 2,
       "faces": [
-        "face-attack-one",
-        "face-attack-two",
-        "face-attack-three",
-        "face-attack-four",
-        "face-attack-five",
-        "face-attack-six"
+        "simple-face-attack",
+        "simple-face-attack",
+        "simple-face-attack",
+        "simple-face-attack",
+        "simple-face-miss",
+        "simple-face-miss"
       ]
     },
     {
-      "name": "dice-basic-defense",
+      "name": "dice-basic-deffense",
       "mana_cost": 2,
       "faces": [
-        "face-defense-one",
-        "face-defense-two",
-        "face-defense-three",
-        "face-defense-four",
-        "face-defense-five",
-        "face-defense-six"
+        "simple-face-deffense",
+        "simple-face-deffense",
+        "simple-face-deffense",
+        "simple-face-deffense",
+        "simple-face-miss",
+        "simple-face-miss"
       ]
     },
     {
-      "name": "dice-basic-attack-defense",
+      "name": "dice-basic-attack-deffense",
       "mana_cost": 3,
       "faces": [
-        "face-attack-two",
-        "face-attack-three",
-        "face-attack-four",
-        "face-defense-two",
-        "face-defense-three",
-        "face-defense-four"
+        "simple-face-attack",
+        "simple-face-attack",
+        "simple-face-attack",
+        "simple-face-deffense",
+        "simple-face-deffense",
+        "simple-face-deffense"
       ]
     }
   ]
