@@ -4,7 +4,7 @@
 
 Turn BattleRoom::turn = Turn::PLAYER;
 
-BattleRoom::BattleRoom(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id, int width, int height,
+BattleRoom::BattleRoom(glm::vec2 position, glm::vec2 scale, double rotation, const std::string& asset_id, int width, int height,
 	int z_index, Color color, bool flip_x, AssetsManager* assets_manager, int screen_width, int screen_height, Random* random)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
@@ -82,9 +82,9 @@ void BattleRoom::ConfigureRoom()
 	player_mana_text = nullptr;
 	enemy_health_text = nullptr;
 
-	player_health_text = new Text(player_position + glm::vec2(0, 128), glm::vec2(0.25), "100/100", "charriot-font", assets_manager);
-	player_mana_text = new Text(player_position + glm::vec2(0, 160), glm::vec2(0.25), "100/100", "charriot-font", assets_manager);
-	enemy_health_text = new Text(enemy_position + glm::vec2(-24, 128), glm::vec2(0.25), "100/100", "charriot-font", assets_manager);
+	player_health_text = new Text(player_position + glm::vec2(0, 128), glm::vec2(0.25), "100/100", "arial-font", assets_manager);
+	player_mana_text = new Text(player_position + glm::vec2(0, 160), glm::vec2(0.25), "100/100", "arial-font", assets_manager);
+	enemy_health_text = new Text(enemy_position + glm::vec2(-24, 128), glm::vec2(0.25), "100/100", "arial-font", assets_manager);
 
 	player = new Player(player_position, glm::vec2(1.5), 0.0, "guys", 128, 128, 0, Color(255, 255, 255, 255),
 		false, assets_manager, random, player_health_text, player_mana_text);

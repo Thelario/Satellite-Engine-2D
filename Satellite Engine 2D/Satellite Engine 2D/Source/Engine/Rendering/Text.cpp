@@ -2,7 +2,7 @@
 
 #include "../Logger/Logger.h"
 
-Text::Text(glm::vec2 position, glm::vec2 scale, std::string text, std::string asset_id, AssetsManager* assets_manager, SDL_Color color)
+Text::Text(glm::vec2 position, glm::vec2 scale, const std::string& text, const std::string& asset_id, AssetsManager* assets_manager, SDL_Color color)
 {
 	this->position = position;
 	this->scale = scale;

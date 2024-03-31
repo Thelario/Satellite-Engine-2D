@@ -5,7 +5,7 @@
 #include "../../../../Engine/InputManager/InputManager.h"
 #include "../../../../Engine/Logger/Logger.h"
 
-Dice::Dice(std::string name, glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id,
+Dice::Dice(const std::string& name, glm::vec2 position, glm::vec2 scale, double rotation, const std::string& asset_id,
 	int width, int height, int z_index, Color color, bool flip_x, AssetsManager* assets_manager, Uint32 time_rate,
 	glm::vec2 screen_center, Uint32 time_rate_limit, Random* random, DiceInfo* dice_info)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
@@ -27,7 +27,7 @@ Dice::Dice(std::string name, glm::vec2 position, glm::vec2 scale, double rotatio
 	this->mana_cost_texture = assets_manager->GetTexture("dices-simple");
 
 	this->mana_cost_text = new Text(glm::vec2(position.x, position.y), glm::vec2(0.25),
-		std::to_string(dice_info->GetManaCost()), "charriot-font", assets_manager);
+		std::to_string(dice_info->GetManaCost()), "arial-font", assets_manager);
 }
 
 void Dice::Start() { }

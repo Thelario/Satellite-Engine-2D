@@ -126,6 +126,9 @@ void Game::Run()
 
 void Game::Setup()
 {
+    // TODO: I AM NOT DESTROYING THE BATTLE ROOM. IT SHOULD BE CREATED INSIDE A PARTICULAR SCENE FROM
+    // A CONFIGURATION FILE AND NOT FROM HERE
+
     std::vector<GameObject*> scene_one;
     BattleRoom* battle_room = new BattleRoom(glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), glm::vec2(1), 0.0, "battle-room-background",
         SCREEN_WIDTH, SCREEN_HEIGHT, 0, Color(255, 255, 255, 255), false, assets_manager, SCREEN_WIDTH, SCREEN_HEIGHT, unrepeatable_random);

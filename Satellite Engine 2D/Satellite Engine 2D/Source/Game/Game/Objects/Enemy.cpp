@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id, int width, int height,
+Enemy::Enemy(glm::vec2 position, glm::vec2 scale, double rotation, const std::string& asset_id, int width, int height,
 	int z_index, Color color, bool flip_x, AssetsManager* assets_manager, Text* health_text, Random* random)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {

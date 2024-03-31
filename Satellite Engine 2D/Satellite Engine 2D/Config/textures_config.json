@@ -1,20 +1,6 @@
 {
   "textures": [
     {
-      "asset_id": "dice-one-image",
-      "name": "dice_one.png",
-      "width": 192,
-      "height": 128,
-      "tile_size": 64
-    },
-    {
-      "asset_id": "dices-one",
-      "name": "dices.png",
-      "width": 448,
-      "height": 192,
-      "tile_size": 64
-    },
-    {
       "asset_id": "guys",
       "name": "guys.png",
       "width": 256,

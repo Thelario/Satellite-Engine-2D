@@ -2,7 +2,7 @@
 
 #include "../../../Engine/Logger/Logger.h"
 
-Player::Player( glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id, int width, int height,
+Player::Player( glm::vec2 position, glm::vec2 scale, double rotation, const std::string& asset_id, int width, int height,
 	int z_index, Color color, bool flip_x, AssetsManager* assets_manager, Random* random, Text* health_text, Text* mana_text)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {

@@ -2,22 +2,22 @@
 
 #include "../../../../Engine/Logger/Logger.h"
 
-DiceInfo::DiceInfo(std::string dice_name, int mana_cost)
+DiceInfo::DiceInfo(const std::string& dice_name, int mana_cost)
 {
 	this->dice_name = dice_name;
 	this->mana_cost = mana_cost;
 }
 
-std::string DiceInfo::GetDiceName() { return dice_name; }
+const std::string& DiceInfo::GetDiceName() const { return dice_name; }
 
-int DiceInfo::GetManaCost() { return mana_cost; }
+int DiceInfo::GetManaCost() const { return mana_cost; }
 
 void DiceInfo::AddFace(Face* face)
 {
 	faces.push_back(face);
 }
 
-Face* DiceInfo::GetFace(int face)
+Face* DiceInfo::GetFace(int face) const
 {
 	if (face >= faces.size()) {
 		Logger::Error("Trying to get a face bigger than the size of faces.");
@@ -27,9 +27,9 @@ Face* DiceInfo::GetFace(int face)
 	return faces[face];
 }
 
-std::vector<Face*> DiceInfo::GetFaces() { return faces; }
+std::vector<Face*> DiceInfo::GetFaces() const { return faces; }
 
-int DiceInfo::GetFacesSize() { return faces.size(); }
+const int DiceInfo::GetFacesSize() const { return faces.size(); }
 
 void DiceInfo::PrintFaces()
 {

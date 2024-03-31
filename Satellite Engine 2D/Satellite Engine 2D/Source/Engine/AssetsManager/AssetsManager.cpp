@@ -13,12 +13,10 @@ AssetsManager::AssetsManager(SDL_Renderer* renderer)
 {
 	this->renderer = renderer;
 
-	if (LoadAssets() == true)
-	{
+	if (LoadAssets() == true) {
 		Logger::Log("Assets Manager created!");
 	}
-	else
-	{
+	else {
 		Logger::Log("Assets Manager created with errors!! BE CAREFUL!!!");
 	}
 }

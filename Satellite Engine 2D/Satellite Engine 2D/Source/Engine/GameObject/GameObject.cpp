@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "../InputManager/InputManager.h"
 
-GameObject::GameObject(glm::vec2 position, glm::vec2 scale, double rotation, std::string asset_id,
+GameObject::GameObject(glm::vec2 position, glm::vec2 scale, double rotation, const std::string& asset_id,
 	int width, int height, int z_index, Color color, bool flip_x, AssetsManager* assets_manager)
 {
 	this->position = position;

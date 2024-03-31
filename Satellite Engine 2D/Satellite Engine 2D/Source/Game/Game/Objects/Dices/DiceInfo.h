@@ -13,13 +13,13 @@ class DiceInfo
 		std::vector<Face*> faces;
 
 	public:
-		DiceInfo(std::string dice_name, int mana_cost);
+		DiceInfo(const std::string& dice_name, int mana_cost);
 
-		std::string GetDiceName();
-		int GetManaCost();
+		const std::string& GetDiceName() const;
+		int GetManaCost() const;
 		void AddFace(Face* face);
-		Face* GetFace(int face);
-		std::vector<Face*> GetFaces();
-		int GetFacesSize();
+		Face* GetFace(int face) const;
+		std::vector<Face*> GetFaces() const;
+		const int GetFacesSize() const;
 		void PrintFaces();
 };

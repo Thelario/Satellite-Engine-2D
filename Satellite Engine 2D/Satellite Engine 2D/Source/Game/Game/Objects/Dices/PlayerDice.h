@@ -9,9 +9,9 @@ class PlayerDice
 		bool in_hand;
 
 	public:
-		PlayerDice(std::string dice_id, bool in_hand = false);
+		PlayerDice(const std::string& dice_id, bool in_hand = false);
 
-		DiceInfo* GetDiceInfo();
-		bool IsInHand();
+		DiceInfo* GetDiceInfo() const;
+		bool IsInHand() const;
 		void SetInHand(bool is_in_hand);
 };
