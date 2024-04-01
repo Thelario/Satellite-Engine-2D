@@ -15,9 +15,9 @@
       "tile_size": 0
     },
     {
-      "asset_id": "dices-simple",
-      "name": "dices_simple_icons.png",
-      "width": 192,
+      "asset_id": "dices",
+      "name": "dices.png",
+      "width": 640,
       "height": 320,
       "tile_size": 64
     }

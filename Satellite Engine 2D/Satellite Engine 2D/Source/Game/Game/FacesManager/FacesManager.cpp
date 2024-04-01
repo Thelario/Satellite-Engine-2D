@@ -43,7 +43,7 @@ bool FacesManager::LoadFaces()
 
 	for (const auto& face : json_data["faces"])
 	{
-		Face* new_face = new Face(face["asset_id"], face["image_id"], face["face_type"], face["value"]);
+		Face* new_face = new Face(face["asset_id"], face["image_id"], face["face_type"], face["level"]);
 
 		faces.emplace(face["name"], new_face);
 	}

@@ -10,9 +10,9 @@ class Face
 		std::string asset_id;
 		unsigned int image_id;
 		FaceType face_type;
-		int value;
+		int level;
 
-		Face(std::string asset_id = "", unsigned int image_id = 0, FaceType face_type = FaceType::ATTACK, int value = 0);
+		Face(std::string asset_id = "", unsigned int image_id = 0, FaceType face_type = FaceType::ATTACK, int level = 0);
 
 		void UseFace();
 		void PrintFace();

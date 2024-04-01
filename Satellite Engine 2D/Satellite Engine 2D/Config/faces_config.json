@@ -1,39 +1,326 @@
 {
   "faces": [
     {
-      "name": "simple-face-mana",
+      "name": "heart-one",
       "face_type": 1,
-      "asset_id": "dices-simple",
+      "asset_id": "dices",
       "image_id": 0,
-      "value": 1
+      "level": 1
     },
     {
-      "name": "simple-face-attack",
+      "name": "heart-two",
       "face_type": 1,
-      "asset_id": "dices-simple",
+      "asset_id": "dices",
       "image_id": 1,
-      "value": 1
+      "level": 2
     },
     {
-      "name": "simple-face-deffense",
+      "name": "heart-three",
       "face_type": 1,
-      "asset_id": "dices-simple",
+      "asset_id": "dices",
       "image_id": 2,
-      "value": 1
+      "level": 3
     },
     {
-      "name": "simple-face-miss",
+      "name": "heart-four",
       "face_type": 1,
-      "asset_id": "dices-simple",
+      "asset_id": "dices",
+      "image_id": 3,
+      "level": 4
+    },
+    {
+      "name": "heart-five",
+      "face_type": 1,
+      "asset_id": "dices",
       "image_id": 4,
-      "value": 1
+      "level": 5
     },
     {
-      "name": "simple-face-health",
+      "name": "strength-one",
       "face_type": 1,
-      "asset_id": "dices-simple",
+      "asset_id": "dices",
       "image_id": 5,
-      "value": 1
+      "level": 1
+    },
+    {
+      "name": "strength-two",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 6,
+      "level": 2
+    },
+    {
+      "name": "strength-three",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 7,
+      "level": 3
+    },
+    {
+      "name": "strength-four",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 8,
+      "level": 4
+    },
+    {
+      "name": "strength-five",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 9,
+      "level": 5
+    },
+    {
+      "name": "mana-one",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 10,
+      "level": 1
+    },
+    {
+      "name": "mana-two",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 11,
+      "level": 2
+    },
+    {
+      "name": "mana-three",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 12,
+      "level": 3
+    },
+    {
+      "name": "mana-four",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 13,
+      "level": 4
+    },
+    {
+      "name": "mana-five",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 14,
+      "level": 5
+    },
+    {
+      "name": "heal-one",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 15,
+      "level": 1
+    },
+    {
+      "name": "heal-two",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 16,
+      "level": 2
+    },
+    {
+      "name": "heal-three",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 17,
+      "level": 3
+    },
+    {
+      "name": "heal-four",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 18,
+      "level": 4
+    },
+    {
+      "name": "heal-five",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 19,
+      "level": 5
+    },
+    {
+      "name": "sword-one",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 20,
+      "level": 1
+    },
+    {
+      "name": "sword-two",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 21,
+      "level": 2
+    },
+    {
+      "name": "sword-three",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 22,
+      "level": 3
+    },
+    {
+      "name": "sword-four",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 23,
+      "level": 4
+    },
+    {
+      "name": "sword-five",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 24,
+      "level": 5
+    },
+    {
+      "name": "potion-one",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 25,
+      "level": 1
+    },
+    {
+      "name": "potion-two",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 26,
+      "level": 2
+    },
+    {
+      "name": "potion-three",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 27,
+      "level": 3
+    },
+    {
+      "name": "potion-four",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 28,
+      "level": 4
+    },
+    {
+      "name": "potion-five",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 29,
+      "level": 5
+    },
+    {
+      "name": "shield-one",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 30,
+      "level": 1
+    },
+    {
+      "name": "shield-two",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 31,
+      "level": 2
+    },
+    {
+      "name": "shield-three",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 32,
+      "level": 3
+    },
+    {
+      "name": "shield-four",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 33,
+      "level": 4
+    },
+    {
+      "name": "shield-five",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 34,
+      "level": 5
+    },
+    {
+      "name": "spear-one",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 35,
+      "level": 1
+    },
+    {
+      "name": "spear-two",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 36,
+      "level": 2
+    },
+    {
+      "name": "spear-three",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 37,
+      "level": 3
+    },
+    {
+      "name": "spear-four",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 38,
+      "level": 4
+    },
+    {
+      "name": "spear-five",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 39,
+      "level": 5
+    },
+    {
+      "name": "shuriken-one",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 40,
+      "level": 1
+    },
+    {
+      "name": "shuriken-two",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 41,
+      "level": 2
+    },
+    {
+      "name": "shuriken-three",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 42,
+      "level": 3
+    },
+    {
+      "name": "shuriken-four",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 43,
+      "level": 4
+    },
+    {
+      "name": "shuriken-five",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 44,
+      "level": 5
+    },
+    {
+      "name": "miss",
+      "face_type": 1,
+      "asset_id": "dices",
+      "image_id": 45,
+      "level": 1
     }
   ]
 }

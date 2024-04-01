@@ -3,12 +3,12 @@
 #include "../BattleRoom.h"
 #include "../../../../Engine/Logger/Logger.h"
 
-Face::Face(std::string asset_id, unsigned int image_id, FaceType face_type, int value)
+Face::Face(std::string asset_id, unsigned int image_id, FaceType face_type, int level)
 {
 	this->asset_id = asset_id;
 	this->image_id = image_id;
 	this->face_type = face_type;
-	this->value = value;
+	this->level = level;
 }
 
 void Face::UseFace()
@@ -30,5 +30,5 @@ void Face::PrintFace()
 {
 	std::string type = face_type == FaceType::ATTACK ? "Attack" : "Defense";
 
-	Logger::Log("Face with " + asset_id + ", " + std::to_string(image_id) + ", " + std::to_string(value) + ", " + type);
+	Logger::Log("Face with " + asset_id + ", " + std::to_string(image_id) + ", " + std::to_string(level) + ", " + type);
 }

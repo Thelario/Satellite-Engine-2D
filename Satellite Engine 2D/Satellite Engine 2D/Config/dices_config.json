@@ -1,39 +1,39 @@
 {
   "dices": [
     {
-      "name": "dice-basic-attack",
-      "mana_cost": 2,
+      "name": "basic-sword",
+      "mana_cost": 1,
       "faces": [
-        "simple-face-attack",
-        "simple-face-attack",
-        "simple-face-attack",
-        "simple-face-attack",
-        "simple-face-miss",
-        "simple-face-miss"
+        "sword-one",
+        "sword-one",
+        "sword-one",
+        "sword-one",
+        "miss",
+        "miss"
       ]
     },
     {
-      "name": "dice-basic-deffense",
-      "mana_cost": 2,
+      "name": "basic-shield",
+      "mana_cost": 1,
       "faces": [
-        "simple-face-deffense",
-        "simple-face-deffense",
-        "simple-face-deffense",
-        "simple-face-deffense",
-        "simple-face-miss",
-        "simple-face-miss"
+        "shield-one",
+        "shield-one",
+        "shield-one",
+        "shield-one",
+        "miss",
+        "miss"
       ]
     },
     {
-      "name": "dice-basic-attack-deffense",
-      "mana_cost": 3,
+      "name": "basic-sword-shield",
+      "mana_cost": 2,
       "faces": [
-        "simple-face-attack",
-        "simple-face-attack",
-        "simple-face-attack",
-        "simple-face-deffense",
-        "simple-face-deffense",
-        "simple-face-deffense"
+        "sword-one",
+        "sword-one",
+        "sword-one",
+        "shield-one",
+        "shield-one",
+        "shield-one"
       ]
     }
   ]

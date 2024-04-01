@@ -24,7 +24,7 @@ Dice::Dice(const std::string& name, glm::vec2 position, glm::vec2 scale, double 
 	this->direction = glm::normalize(direction);
 	this->random = random;
 	this->dice_info = dice_info;
-	this->mana_cost_texture = assets_manager->GetTexture("dices-simple");
+	this->mana_cost_texture = assets_manager->GetTexture("dices");
 
 	this->mana_cost_text = new Text(glm::vec2(position.x, position.y), glm::vec2(0.25),
 		std::to_string(dice_info->GetManaCost()), "arial-font", assets_manager);
@@ -85,7 +85,7 @@ void Dice::RenderDice(SDL_Renderer* renderer)
 
 void Dice::RenderManaCost(SDL_Renderer* renderer)
 {
-	SDL_Rect src = mana_cost_texture->GetTileSourceRect(12);
+	SDL_Rect src = mana_cost_texture->GetTileSourceRect(46);
 
 	float real_width = width * scale.x;
 	float real_height = height * scale.y;

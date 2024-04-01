@@ -25,12 +25,12 @@ Player::Player( glm::vec2 position, glm::vec2 scale, double rotation, const std:
 	if (mana_text != nullptr)
 		this->mana_text->SetText("M:" + std::to_string(current_mana) + "/" + std::to_string(max_mana));
 
-	PlayerDice* player_dice_one = new PlayerDice("dice-basic-attack", false);
-	PlayerDice* player_dice_two = new PlayerDice("dice-basic-attack", false);
-	PlayerDice* player_dice_three = new PlayerDice("dice-basic-attack", false);
-	PlayerDice* player_dice_four = new PlayerDice("dice-basic-deffense", false);
-	PlayerDice* player_dice_five = new PlayerDice("dice-basic-deffense", false);
-	PlayerDice* player_dice_six = new PlayerDice("dice-basic-deffense", false);
+	PlayerDice* player_dice_one = new PlayerDice("basic-sword", false);
+	PlayerDice* player_dice_two = new PlayerDice("basic-sword", false);
+	PlayerDice* player_dice_three = new PlayerDice("basic-sword", false);
+	PlayerDice* player_dice_four = new PlayerDice("basic-shield", false);
+	PlayerDice* player_dice_five = new PlayerDice("basic-shield", false);
+	PlayerDice* player_dice_six = new PlayerDice("basic-shield", false);
 
 	this->dice_inventory.push_back(player_dice_one);
 	this->dice_inventory.push_back(player_dice_two);
