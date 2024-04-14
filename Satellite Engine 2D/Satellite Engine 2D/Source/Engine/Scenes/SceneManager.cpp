@@ -33,6 +33,16 @@ void SceneManager::Start(std::vector<std::vector<GameObject*>> scenes_game_objec
 
 void SceneManager::Update(double delta_time)
 {
+	if (InputManager::GetMouseButtonUp(1)) {
+
+		int new_scene = current_scene + 1;
+		if (new_scene >= scenes.size()) {
+			new_scene = 0;
+		}
+
+		ChangeScene(new_scene);
+	}
+
 	scenes[current_scene]->Update(delta_time);
 }
 

@@ -3,10 +3,11 @@
 #include <map>
 #include <string>
 
-#include "../FacesManager/FacesManager.h"
-#include "../Objects/Dices/DiceInfo.h"
 #include "../../../Engine/AssetsManager/AssetsManager.h"
 #include "../../../Engine/Utils/Random.h"
+
+#include "../FacesManager/FacesManager.h"
+#include "../Objects/Dices/DiceInfo.h"
 
 class DicesManager
 {
@@ -23,6 +24,8 @@ class DicesManager
 
 		bool LoadDices();
 		void ClearDices();
+
+		std::map<std::string, DiceInfo*> GetDices() const;
 
 		static DiceInfo* GetDice(const std::string& dice_name);
 };

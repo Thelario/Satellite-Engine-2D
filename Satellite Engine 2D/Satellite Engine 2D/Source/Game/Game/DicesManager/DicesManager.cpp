@@ -87,6 +87,11 @@ void DicesManager::ClearDices()
 	dices.clear();
 }
 
+std::map<std::string, DiceInfo*> DicesManager::GetDices() const
+{
+	return dices;
+}
+
 DiceInfo* DicesManager::GetDice(const std::string& dice_name)
 {
 	if (dices.find(dice_name) == dices.end())

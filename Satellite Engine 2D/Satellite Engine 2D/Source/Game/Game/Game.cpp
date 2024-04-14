@@ -8,6 +8,7 @@
 #include "../../Engine/InputManager/InputManager.h"
 
 #include "Objects/BattleRoom.h"
+#include "Objects/Dices/Inventory/Inventory.h"
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
@@ -126,16 +127,21 @@ void Game::Run()
 
 void Game::Setup()
 {
-    // TODO: I AM NOT DESTROYING THE BATTLE ROOM. IT SHOULD BE CREATED INSIDE A PARTICULAR SCENE FROM
-    // A CONFIGURATION FILE AND NOT FROM HERE
+    // TODO: scenes should be created from a configuration file or something like that, but okey for now
 
     std::vector<GameObject*> scene_one;
-    BattleRoom* battle_room = new BattleRoom(glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), glm::vec2(1), 0.0, "battle-room-background",
+    battle_room = new BattleRoom(glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), glm::vec2(1), 0.0, "battle-room-background",
         SCREEN_WIDTH, SCREEN_HEIGHT, 0, Color(255, 255, 255, 255), false, assets_manager, SCREEN_WIDTH, SCREEN_HEIGHT, unrepeatable_random);
     scene_one.push_back(battle_room);
 
+    std::vector<GameObject*> scene_two;
+    inventory = new Inventory(glm::vec2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), glm::vec2(1), 0.0, "inventory-background",
+        SCREEN_WIDTH, SCREEN_HEIGHT, 0, Color(255, 255, 255, 255), false, assets_manager, SCREEN_WIDTH, SCREEN_HEIGHT, dices_manager);
+    scene_two.push_back(inventory);
+
     std::vector<std::vector<GameObject*>> scenes_game_objects;
     scenes_game_objects.push_back(scene_one);
+    scenes_game_objects.push_back(scene_two);
 
     scene_manager->Start(scenes_game_objects);
 }
@@ -237,6 +243,8 @@ void Game::Render()
 
 void Game::Destroy()
 {
+    delete inventory;
+    delete battle_room;
     delete unrepeatable_random;
     delete repeatable_random;
     delete faces_manager;

@@ -20,6 +20,13 @@
       "width": 640,
       "height": 320,
       "tile_size": 64
+    },
+    {
+      "asset_id": "inventory-background",
+      "name": "inventory_background.png",
+      "width": 1080,
+      "height": 720,
+      "tile_size": 0
     }
   ]
 }

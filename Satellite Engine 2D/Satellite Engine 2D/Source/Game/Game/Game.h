@@ -30,6 +30,9 @@ class Game
 		Random* unrepeatable_random;
 		Random* repeatable_random;
 
+		GameObject* battle_room;
+		GameObject* inventory;
+
 		void Initialize();
 		void Setup();
 		void ProcessInput();
