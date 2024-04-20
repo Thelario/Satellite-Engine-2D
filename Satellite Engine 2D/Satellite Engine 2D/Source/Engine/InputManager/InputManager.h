@@ -8,7 +8,7 @@
 enum class KeyCode
 {
 	A, B, C, D, E, F, G, H, I, J, K, L, M, N, Ñ, O, P, Q, R, S, T, U, V, W, X, Y, Z,
-	ESCAPE, TAB, CTRL, ALT, INTRO, ZERO, ONE, TWO, THREE, FOUR, FIVE, SIXE, SEVEN, EIGHT, NINE
+	ESCAPE, TAB, CTRL, ALT, INTRO, ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
 };
 
 class InputManager

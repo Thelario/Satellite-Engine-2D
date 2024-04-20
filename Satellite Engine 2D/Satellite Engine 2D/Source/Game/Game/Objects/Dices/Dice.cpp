@@ -5,12 +5,15 @@
 #include "../../../../Engine/InputManager/InputManager.h"
 #include "../../../../Engine/Logger/Logger.h"
 
+#include "../BattleRoom.h"
+
 Dice::Dice(const std::string& name, glm::vec2 position, glm::vec2 scale, double rotation, const std::string& asset_id,
 	int width, int height, int z_index, Color color, bool flip_x, AssetsManager* assets_manager, Uint32 time_rate,
-	glm::vec2 screen_center, Uint32 time_rate_limit, Random* random, DiceInfo* dice_info)
+	glm::vec2 screen_center, Uint32 time_rate_limit, Random* random, DiceInfo* dice_info, BattleRoom* battle_room)
 	: GameObject(position, scale, rotation, asset_id, width, height, z_index, color, flip_x, assets_manager)
 {
 	this->rotating_dice = false;
+	this->dice_used = false;
 	this->using_dice = false;
 	this->face = 0;
 	this->selected_face = -1;
@@ -25,7 +28,7 @@ Dice::Dice(const std::string& name, glm::vec2 position, glm::vec2 scale, double 
 	this->random = random;
 	this->dice_info = dice_info;
 	this->mana_cost_texture = assets_manager->GetTexture("dices");
-
+	this->battle_room = battle_room;
 	this->mana_cost_text = new Text(glm::vec2(position.x, position.y), glm::vec2(0.25),
 		std::to_string(dice_info->GetManaCost()), "arial-font", assets_manager);
 }
@@ -130,7 +133,13 @@ void Dice::UseDice(double delta_time)
 
 		if (time_rate >= time_rate_limit)
 		{
-			if (face == selected_face) {
+			if (face == selected_face)
+			{
+				if (dice_used == false) {
+					battle_room->AttackEnemy(1);
+					dice_used = true;
+				}
+				
 				return;
 			}
 		}

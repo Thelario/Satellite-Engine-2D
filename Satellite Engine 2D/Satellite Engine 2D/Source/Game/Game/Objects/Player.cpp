@@ -19,11 +19,13 @@ Player::Player( glm::vec2 position, glm::vec2 scale, double rotation, const std:
 	this->health_text = health_text;
 	this->mana_text = mana_text;
 
-	if (health_text != nullptr)
+	if (health_text != nullptr) {
 		this->health_text->SetText("H:" + std::to_string(current_health) + "/" + std::to_string(max_health));
+	}
 
-	if (mana_text != nullptr)
+	if (mana_text != nullptr) {
 		this->mana_text->SetText("M:" + std::to_string(current_mana) + "/" + std::to_string(max_mana));
+	}
 
 	PlayerDice* player_dice_one = new PlayerDice("basic-sword", false);
 	PlayerDice* player_dice_two = new PlayerDice("basic-sword", false);

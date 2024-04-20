@@ -1,5 +1,7 @@
 #include "BattleRoom.h"
 
+#include "../../../Engine/Logger/Logger.h"
+
 #include "Player.h"
 
 Turn BattleRoom::turn = Turn::PLAYER;
@@ -149,5 +151,5 @@ void BattleRoom::ShieldPlayer(int defense)
 
 void BattleRoom::AttackEnemy(int damage)
 {
-
+	Logger::Log("ATTACKING FUCKING ENEMY");
 }

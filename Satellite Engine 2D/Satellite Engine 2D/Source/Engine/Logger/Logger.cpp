@@ -18,27 +18,23 @@ std::string CurrentDateTimeToString()
 void Logger::Log(const std::string& message)
 {
     std::string date = CurrentDateTimeToString();
-
     std::cout << "LOG - " << date << " - " << message << std::endl;
 }
 
 void Logger::Warning(const std::string& message)
 {
     std::string date = CurrentDateTimeToString();
-
     std::cout << "WARNING - " << date << " - " << message << std::endl;
 }
 
 void Logger::Error(const std::string& message)
 {
     std::string date = CurrentDateTimeToString();
-
     std::cout << "ERROR - " << date << " - " << message << std::endl;
 }
 
 void Logger::Error(const std::string& message, const char* error)
 {
     std::string date = CurrentDateTimeToString();
-
     std::cout << "ERROR - " << date << " - " << message << ": " << error << std::endl;
 }
